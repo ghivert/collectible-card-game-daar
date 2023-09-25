@@ -1,0 +1,11 @@
+# tests
+coverage
+coverage.json
+typechain
+
+# hardhat files
+artifacts/
+cache/
+src/contracts.json
+/deployments/localhost
+/typechain-types

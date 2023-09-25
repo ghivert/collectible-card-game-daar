@@ -1,0 +1,15 @@
+{
+  "name": "touche-coule",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ghivert/touche-coule.git",
+  "author": "Guillaume Hivert <hivert.is.coming@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "yarn --cwd contracts install && yarn --cwd frontend install",
+    "dev": "concurrently -c \"blue.bold,red.bold\" --names \"ethereum,frontend\" \"yarn --cwd contracts dev\" \"yarn --cwd frontend dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  }
+}
