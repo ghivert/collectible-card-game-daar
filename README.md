@@ -1,8 +1,8 @@
-# Touché Coulé
+# Collectible Card Game
 
-Welcome to the DAAR project. The idea will be to implement a "Touché Coulé" (Battleship) game
-in a decentralized way, on Ethereum. This will have cool side effects, like not
-be forced to pay for servers.
+Welcome to the DAAR project. The idea will be to implement a Collectible Card Game
+in a decentralized way, on Ethereum. This will force you to iterate through the creation
+of CCG cards as NFT, create a marketplace for players to exchange NFT, and run a frontend to create collections.
 
 # Installation
 
@@ -48,21 +48,3 @@ yarn dev
 You’re good to go!
 
 # Subject
-
-Implement a Touché Coulé from scratch in Solidity. The game is running into a contract by its own. Your job is to create an agent (i.e. a smart contract, i.e. an AI) to play the game. The interface of the agent is given in the sources.
-
-The idea of the game is to fight in a free for all style (every players will play in the same time) with ships. Each player have two ships, of size 1. At the beginning of the game, you're placing your ships on a grid (50x50). Every turn, your ships will be able to fire once. Your goal is to destroy all the opponents ships. In a second step, your ships will be able to talk to each other, and potentially to do some diplomacy with other ships.
-
-# Smart Contract
-
-- Create your ship by inheriting the base contract.
-- The contract should override all the functions in the `Ship.sol` contract.
-- `place` is the first function called by the contract after registering the ship. It should returns the place of the ship.
-- `update` is called after the ship is placed on the board. For some implementation reasons, the place can, in some times, not be given. You can use that information, or not.
-- Finally, `fire` is run at each turn, and should try to touch a ship by returning a position (x, y).
-- Deploy the contract with a proper deployment. 
-- Register the ship on the Main contract. 
-- Do all the same steps with a second ship and a second player. 
-- Test your implementation with the turn function. 
-
-Pro tip: you can automate the ship deployment and registering with the deployments. 
