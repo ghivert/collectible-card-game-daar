@@ -8,9 +8,9 @@ of CCG cards as NFT, create a marketplace for players to exchange NFT, and run a
 
 ```bash
 # With HTTPS
-git clone https://github.com/ghivert/touche-coule.git
+git clone https://github.com/ghivert/collectible-card-game-daar.git
 # Or with SSH
-git clone git@github.com:ghivert/touche-coule.git
+git clone git@github.com:ghivert/collectible-card-game-daar.git
 ```
 
 You’ll need to install dependencies. You’ll need [`HardHat`](https://hardhat.org/), [`Node.js`](https://nodejs.org/en/), [`NPM`](https://www.npmjs.com/) and [`Yarn`](https://yarnpkg.com/). You’ll need to install [`Metamask`](https://metamask.io/) as well to communicate with your blockchain.
@@ -48,3 +48,51 @@ yarn dev
 You’re good to go!
 
 # Subject
+
+As all collectible card games, you'll have to manage collections, and each collections should have characteristics.
+
+## First onchain part
+
+> Create the NFT contract.
+
+1. First, implement a contract able to create some Collections. Each collection is made of a name, a card count (the number of cards in the set), and is a set of NFT. A NFT is a token implementing the standard ERC-721. Each card will be an NFT from a specific collection. In a first time, you will implement only the card number and an img field in a first time in the metadata of the NFT.
+Everytime we want to create a new set of cards, we create the collection with a name, and a card count, by calling a function to the Main contract. The Main contract is a way to retrieve all informations from the different sets.
+2. The Main contract will have an owner (i.e. a super-admin), which will be able to mint and assign cards to a selected user in a selected collection.
+3. The owner will be able to mint and assign an arbitrary amount of cards to a user from a specified collection.
+
+## First offchain part
+
+> Create the frontend to interact with the contract.
+
+1. Create an API able to give informations about an NFT. Simply returns a JSON containing a card name and an illustration (which can be empty). You'll have to create a webserver (you can use Express.js or anything else you want).
+2. Create a frontend to visualize all the cards (i.e. NFT) owned by the user. Keep in mind:
+  - A user will have some NFT after the owner mint some for him.
+  - A user will be able to see its NFT by connecting to the frontend.
+    - The user will retrieve all NFT he possess from the chain.
+    - The user will then retrieve all metadata of the NFT from the API.
+3. Create a frontend and an API (if needed) in order to visualize, for each set, all users and their possessions. You'll maybe have to use events and parse the transactions offchain on an API to retrieve all those information.
+
+## Integration of Pokémon TCG
+
+> Now, it's time to integrate real cards, with real illustrations !
+
+1. Integrate [Pokémon TCG API](https://pokemontcg.io/).
+  - Choose which sets you want to integrate, and add them to the Main contract.
+  - For each of those sets, you'll have to find the correct card count.
+  - Modify the API to return the information of the Pokémon card corresponding to the NFT.
+
+## Add more features
+
+> Now we'll create some boosters to redeem!
+
+1. To create a booster, create a booster offline on your API, and find a way to redeem it onchain, on the contract. The booster must have some cards in it, and it should have the exact same cards when redeemed. The booster should be an NFT.
+
+## To go beyond
+
+> Implement at least one feature.
+
+- Improve the frontend, by adding a way to manage collection, like a binder.
+- Improve the contract, to be able to manage a multichain codebase, with a bridge between chains.
+- Add a game engine for the cards, like fighting with your Pokémon and some energy cards.
+- Implement a marketplace to exchange cards between users.
+- Implement a tournament game some promos cards for winners.
