@@ -4,6 +4,8 @@ Welcome to the DAAR project. The idea will be to implement a Collectible Card Ga
 in a decentralized way, on Ethereum. This will force you to iterate through the creation
 of CCG cards as NFT, create a marketplace for players to exchange NFT, and run a frontend to create collections.
 
+[First slideshow](https://www.figma.com/file/MbBKLKATrPIRNDPfY23uwW/Blockchain-%26-Smart-Contracts?type=design&node-id=0%3A1&mode=design&t=FvBuqccvh9fpfW1o-1)
+
 # Installation
 
 ```bash
