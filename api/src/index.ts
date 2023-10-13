@@ -1,14 +1,21 @@
-import express, { Express, Request, Response , Application } from 'express';
+// index.ts
+import express from 'express';
+const app = express();
+const port = 8000;
 
+app.use(express.json());
 
+app.post('/mint', async (req, res) => {
+    const { address, tokenId } = req.body;
 
-const app: Application = express();
-const port = process.env.PORT || 8000;
+    // Call the mint function on the smart contract using ethers.js
+    // Example code: (Assuming you've deployed the contract and have an ethers provider)
+    // const contract = new ethers.Contract(contractAddress, abi, signer);
+    // await contract.mint(address, tokenId);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to Express & TypeScript Server');
+    res.send(`Minted NFT with tokenId: ${tokenId} to address: ${address}`);
 });
 
 app.listen(port, () => {
-  console.log(`Server is Fire at http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
