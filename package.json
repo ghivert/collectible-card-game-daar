@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "concurrently": "^7.5.0"
+  },
+  "dependencies": {
+    "web3": "^4.1.2"
   }
 }

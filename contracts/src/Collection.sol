@@ -9,4 +9,5 @@ contract Collection {
     name = _name;
     cardCount = _cardCount;
   }
+
 }
