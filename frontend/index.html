@@ -16,6 +16,7 @@
 
     <script type="module" src="/src/main.tsx"></script>
     <script>
+      
       var crypto;
       var userAccount;
 
@@ -48,12 +49,14 @@
         });
       }
       }
-      
+
+      //Given a id retruns a colection 
       function getCollecionDetails(id) {
         return crypto.methods.collections(id).call()
       }
+      //Given a owner  id return name
       function getcollectionByOwner(owner) {
-        return crypto.methods.ownerOf(owner).call()
+        return crypto.methods.getcollectionByOwner(owner).call()
       }
 
       window.addEventListener('load', function() {
