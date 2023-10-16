@@ -13,6 +13,7 @@
     "concurrently": "^7.5.0"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
     "web3": "^4.1.2"
   }
 }

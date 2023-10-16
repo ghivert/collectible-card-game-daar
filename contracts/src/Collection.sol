@@ -5,9 +5,10 @@ pragma solidity ^0.8.16;
 import "./Ownable.sol";
 import "./Pokemon.sol";
 
-contract Collection  {
+contract Collection  {  ///card==nft
   string public name;
   int public cardCount;  // nomre de carte dns la collection
+  //adress public owner;
   // (tokennft==> Card )
   mapping(uint => Pokemon)  pokemons;
 
