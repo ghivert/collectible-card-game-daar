@@ -1,7 +1,10 @@
 pragma solidity ^0.8.16;
 import "./erc721.sol";
 
-contract PokemonOwenership is ERC721  {
+
+contract PokemonOwenership is ERC721 {
+  
+  address private _owner;
 
   function balanceOf(address _owner)  public virtual override   returns (uint256) {
 
