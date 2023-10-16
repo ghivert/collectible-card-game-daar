@@ -16,7 +16,4 @@ contract Main   {
   }
 
 
-
-
-
 }
