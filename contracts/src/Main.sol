@@ -22,13 +22,17 @@ contract Main    {
     collections[count++] = new Collection(name, cardCount);
   }
 
-  function create_collection_then_assign_to_user(address user_adress)  public{
+  function create_collection_then_assign_to_user(address user_adress) public     {
     string memory collectionName = "collection name";
 
     createCollection(collectionName, 0);
     address collection_address = address(collections[count - 1]);
     assign_cardPokemon(user_adress, collection_address);
   }
+
+  function getMessage() public view returns (string memory) {
+        return "Hello World";
+    }
 
 
   /** Assign to a user some collection.

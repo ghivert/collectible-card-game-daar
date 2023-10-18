@@ -1,108 +1,117 @@
 const MAIN_ABI = [
     {
-        "constant": true,
-        "inputs": [],
-        "name": "admin",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
     },
     {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "",
-                "type": "int256"
-            }
-        ],
-        "name": "collections",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "admin",
+      "type": "event"
     },
     {
-        "constant": true,
-        "inputs": [],
-        "name": "count",
-        "outputs": [
-            {
-                "name": "",
-                "type": "int256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
+      "constant": true,
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "name",
-                "type": "string"
-            },
-            {
-                "name": "cardCount",
-                "type": "int256"
-            }
-        ],
-        "name": "createCollection",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
+      "inputs": [],
+      "name": "getMessage",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "user_adress",
-                "type": "address"
-            },
-            {
-                "name": "collection_adresse",
-                "type": "address"
-            }
-        ],
-        "name": "assign_cardPokemon",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
+      "constant": true,
+      "inputs": [],
+      "name": "userCollection",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "user_adress",
-                "type": "address"
-            }
-        ],
-        "name": "create_collection_then_assign_to_user",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "int256",
+          "name": "cardCount",
+          "type": "int256"
+        }
+      ],
+      "name": "createCollection",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-        "inputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user_adress",
+          "type": "address"
+        }
+      ],
+      "name": "create_collection_then_assign_to_user",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user_adress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "collection_adresse",
+          "type": "address"
+        }
+      ],
+      "name": "assign_cardPokemon",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
-]
+  ]
+  
 
-
+  
 export default MAIN_ABI

@@ -1,7 +1,7 @@
 // index.ts
 import express from 'express';
 import MAIN_ABI from './config/Main_abi';
-const {Web3} = require('web3');
+import Web3 from 'web3';
 
 const provider = new Web3.providers.HttpProvider("http://localhost:8545")
 const web3 = new Web3(provider);
@@ -19,19 +19,21 @@ const port = 8000;
 app.use(express.json());  
 
 
+
 app.get("/", async (req, res) => {
   try {
-   const user_adress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
-    //const contractData = await contract.methods.balanceOf(user_adress).call();
-    //res.json({ data: contractData });
-    web3.eth.getBalance(user_adress).then(console.log);
-
+    const userAddress = '0x70997970C51812dc3A010C7d01b50e0d17dc79C8';
+    
+    const result = await contract.methods.getMessage().call();
+    console.log(result);
+    
+    
+    res.send("Tu attends quoi !!!!");
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Erreur lors de l\'appel du contrat' });
   }
-  res.send("Hello world");
 });
-
 
 app.post('/mint', async (req, res) => {
   const { address, tokenId } = req.body;
