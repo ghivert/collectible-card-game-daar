@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.20;
+
 import "./erc721.sol";
-//nft
-contract Pokemon is  ERC721 {
+
+/////////
+abstract contract Pokemon  is ERC721{
   int public id;
   string  public img_url;
     

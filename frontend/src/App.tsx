@@ -52,7 +52,6 @@ async function fetchPokemon() {
       'X-RapidAPI-Key': 'e78be1ff-226e-43e7-98c5-5b57ce01ece7',
     }
   };
-  
   try {
     const response = await fetch('https://api.pokemontcg.io/v1/cards?');
     const userData = await response.json();
@@ -70,20 +69,25 @@ export const App = () => {
   useEffect(() => {
     fetchPokemon().then(data => setPokemonData(data));
   })
-  
+
 
   const wallet = useWallet()
-  if (wallet?.details.account != null){
-    let acount =  wallet?.details.account
+  if (wallet?.details.account != null) {
+    let acount = wallet?.details.account
+    console.log(wallet?.contract)
+    console.log(wallet?.contract.getMessage())
+
   }
 
-  
+
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
       <div>
-        <PokemonList cartes={pokemonData?.cards}/>
+        <PokemonList cartes={pokemonData?.cards} />
       </div>
     </div>
   )
 }
+
+

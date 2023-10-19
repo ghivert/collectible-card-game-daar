@@ -1,20 +1,23 @@
 // SPDX-License-Identifier: MIT
 //pragma solidity >=0.5.0 <0.6.0;
 
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.20;
+
 import "./Collection.sol";
 import "./Ownable.sol";
-contract Main    {
-  address public admin;
+import "./PokemonOwenrship.sol";
+import "./Ownable.sol";
+
+contract Main  is  Ownable{
   int private count;
+
+
   mapping(int => Collection) public collections;
 
-  // Mapping pour lier l'adresse de l'utilisateur à une collection donnée
   mapping(address => address) public userCollection;
 
   constructor() {
     count = 0;
-    admin = msg.sender;
   }
 
   function createCollection(string memory name, int cardCount)  public{
@@ -41,5 +44,8 @@ contract Main    {
   function assign_cardPokemon(address user_adress, address collection_adresse)  public{
     userCollection[user_adress]=collection_adresse;
   }
+
+   
+
 
 }
