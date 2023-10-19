@@ -5,76 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokémon TCG</title>
-    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.1.2/web3.min.js"></script>
-    <script language="javascript" type="text/javascript" src="Main_abi.js"></script>
-
   </head>
   <body>
     <div id="root"></div>
-    <div id="collections"></div>
-
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      
-      var crypto;
-      var userAccount;
-
-      function startApp() {
-        var collectionAdress = "YOUR_CONTRACT_ADDRESS";
-        crypto = new web3js.eth.Contract(collection_abi, collectionAdress);
-        var accountInterval = setInterval(function() {
-          // Check if account has changed
-          if (web3.eth.accounts[0] !== userAccount) {
-            userAccount = web3.eth.accounts[0];
-            // Call a function to update the UI with the new account
-            getcollectionByOwner(userAccount)
-            .then(displayCollections);
-          }
-        }, 100);
-      }
-
-      function displayCollections(ids){
-      $("#collections").empty();
-      for (const id of ids) {
-        getCollecionDetails(id)
-        .then(function(collection) {
-          // Using ES6's "template literals" to inject variables into the HTML.
-          // Append each one to our #collections div
-          $("#collections").append(`<div class="collection">
-            <ul>
-              <li>Name: ${collection.name}</li>
-            </ul>
-          </div>`);
-        });
-      }
-      }
-
-      //Given a id retruns a colection 
-      function getCollecionDetails(id) {
-        return crypto.methods.collections(id).call()
-      }
-      //Given a owner  id return name
-      function getcollectionByOwner(owner) {
-        return crypto.methods.getcollectionByOwner(owner).call()
-      }
-
-      window.addEventListener('load', function() {
-
-        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-        if (typeof web3 !== 'undefined') {
-          // Use Mist/MetaMask's provider
-          web3js = new Web3(web3.currentProvider);
-        } else {
-          // Handle the case where the user doesn't have web3. Probably
-          // show them a message telling them to install Metamask in
-          // order to use our app.
-        }
-      
-        // Now you can start your app & access web3js freely:
-        startApp()
-      
-      })
-    </script>
   </body>
 </html>

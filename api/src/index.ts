@@ -3,7 +3,7 @@ import express from 'express';
 import MAIN_ABI from './config/Main_abi';
 import Web3 from 'web3';
 
-const provider = new Web3.providers.HttpProvider("http://localhost:8545")
+const provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545/")
 const web3 = new Web3(provider);
 
 //const web3 = new Web3('http://127.0.0.1:8545/');
@@ -24,9 +24,7 @@ app.get("/", async (req, res) => {
   try {
     const userAddress = '0x70997970C51812dc3A010C7d01b50e0d17dc79C8';
     
-    const result = await contract.methods.getMessage().call();
-    console.log(result);
-    
+    const result = await contract.methods.getMessage().call()    
     
     res.send("Tu attends quoi !!!!");
   } catch (error) {

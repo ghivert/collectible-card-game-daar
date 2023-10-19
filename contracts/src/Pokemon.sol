@@ -12,7 +12,7 @@ contract Pokemon is  ERC721 {
   }
 
    function balanceOf(address _owner)  public virtual override   returns (uint256) {
-
+        
   }
   
   function ownerOf(uint256 _tokenId) public virtual  override returns (address) {
