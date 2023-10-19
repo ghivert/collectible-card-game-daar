@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import * as ethereum from '@/lib/ethereum'
 import * as main from '@/lib/main'
 import axios from 'axios';
+import PokemonList from './components/PokemonList.component';
 
 interface DonneesAPI {
   propriete1: string;
@@ -55,7 +56,6 @@ async function fetchPokemon() {
   try {
     const response = await fetch('https://api.pokemontcg.io/v1/cards?');
     const userData = await response.json();
-    console.log(userData)
     return userData;
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error);
@@ -65,26 +65,25 @@ async function fetchPokemon() {
 
 export const App = () => {
 
+  let [pokemonData, setPokemonData] = useState({});
 
   useEffect(() => {
-    console.log("requete pour les cartes pokemon");
-    fetchPokemon().then(data => {
-      console.log(data);
-    });
+    fetchPokemon().then(data => setPokemonData(data));
   })
   
 
   const wallet = useWallet()
-  console.log(wallet)
   if (wallet?.details.account != null){
     let acount =  wallet?.details.account
-    console.log(wallet?.contract.getMessage())
   }
 
   
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
+      <div>
+        <PokemonList cartes={pokemonData?.cards}/>
+      </div>
     </div>
   )
 }
