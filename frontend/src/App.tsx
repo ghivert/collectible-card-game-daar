@@ -44,10 +44,18 @@ const useWallet = () => {
   }, [details, contract])
 }
 
-async function fetchUserData() {
+async function fetchPokemon() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'e78be1ff-226e-43e7-98c5-5b57ce01ece7',
+    }
+  };
+  
   try {
     const response = await fetch('https://api.pokemontcg.io/v1/cards?');
     const userData = await response.json();
+    console.log(userData)
     return userData;
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error);
@@ -56,7 +64,15 @@ async function fetchUserData() {
 }
 
 export const App = () => {
- 
+
+
+  useEffect(() => {
+    console.log("requete pour les cartes pokemon");
+    fetchPokemon().then(data => {
+      console.log(data);
+    });
+  })
+  
 
   const wallet = useWallet()
   console.log(wallet)
