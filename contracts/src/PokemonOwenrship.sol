@@ -1,19 +1,23 @@
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.19;
 
 import "./erc721.sol";
 import "./Ownable.sol";
 
-contract PokemonOwenership is ERC721, Ownable {
+contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
+
 
   mapping(address => uint256) user_pokemon;  //collection ou chaque (id  --->  url pokemon dans l'api)
   mapping(uint256 => address) pokemon_user;  //collection ou chaque user a un uint 
   
-  /**
-  Can only be called by the contract creator
-  */ 
-  function mint(address receiver, uint256 amount) public onlyOwner {
+   /*
+   * @dev Internal function to mint a new token
+   * Reverts if the given token ID already exists
+   * @param to The address that will own the minted token
+   * @param tokenId uint256 ID of the token to be minted by the msg.sender
+   */
+ function mint(address receiver, uint256 amount) public onlyOwner {
         user_pokemon[receiver] += amount;
-    }
+   }
 
   /*
     Returns the number of tokens in owner's account.
@@ -36,8 +40,8 @@ contract PokemonOwenership is ERC721, Ownable {
       user_pokemon[_to] +=1;
       user_pokemon[_from ] -=1;
       pokemon_user[_tokenId] = _to;
-      emit Transfer(_from, _to, _tokenId);
-  }
+      //emit Transfer(_from, _to, _tokenId);
+ }
 
   /**
    Returns the account approved for tokenId token.
@@ -54,6 +58,20 @@ contract PokemonOwenership is ERC721, Ownable {
     require(msg.sender == pokemon_user[_token]);
     _;
   }
-
+  /**
+    All cards of user 
+   */
+   /** 
+   function getCards() public returns(uint256 [] memory) external {
+    uint256 [] memory cards;
+    uint256 counter; 
+    for (uint256 i=0; i< 10; i++){
+      if(pokemon_user[i]== msg.sender){
+       cards[counter]= i;
+      }
+    }
+    return cards;
+   }
+   */
 
 }

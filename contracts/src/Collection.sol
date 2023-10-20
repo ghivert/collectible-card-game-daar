@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 //pragma solidity  >=0.5.0 <0.6.0;
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.19;
 
 import "./Ownable.sol";
 import "./Pokemon.sol";
@@ -10,16 +10,21 @@ import "./Ownable.sol";
 contract Collection  is ERC721, Ownable{ 
   string public name;
   int public cardCount;  
-  mapping(int  => string) pokmeons;
+  mapping(int  => string) public  pokmeons;
 
   constructor(string memory _name, int _cardCount) {
     name = _name;
     cardCount = _cardCount;
   }
-  function addCarte(string memory id) public onlyOwner  {
+  function addCarte(string memory id) public onlyOwner{
     pokmeons[cardCount]=id;
     cardCount++;
   }
+
+  function getPokemonById(int index) public view returns (string memory) {
+    require(index >= 0 && index < cardCount, "Invalid index");
+    return pokmeons[index];
+}
   
   /*
     Returns the number of tokens in owner's account.

@@ -54,11 +54,11 @@ async function fetchPokemon() {
     }
   };
   try {
-    const response = await fetch('https://api.pokemontcg.io/v1/cards?');
+    const response = await fetch('https://api.pokemontcg.io/v1/cards?limit=10');
     const userData = await response.json();
-    return userData;
+    return {};
   } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error);
+    console.error('Erreur lors de la récupération des données:', error);
     throw error;
   }
 }
@@ -76,7 +76,14 @@ export const App = () => {
   if (wallet?.details.account != null) {
     let acount = wallet?.details.account
     console.log(wallet?.contract)
-    console.log(wallet?.contract.createCollection("collection1"))
+    wallet?.contract.getMessage()
+    wallet?.contract.createCollection('col1')  ///fail 
+     //retrun adress collection only if super_admin col1= 0: "0xd8058efe0198ae9dD7D563e1b4938Dcbc86A1F81"
+     //and col2= "0x6D544390Eb535d61e196c87d6B9c80dCD8628Acd"
+    const value = wallet?.contract.allCollections() 
+    console.log(value)
+    const value2= wallet?.contract.allPokemonsOfCollection(0);  //retturn all adress(url) pokemon of one collection
+    console.log(value2)   // pokemon_url ="xy7-10"
 
   }
 
