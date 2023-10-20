@@ -30,19 +30,20 @@ const useAffect = (
 
 const useWallet = () => {
   const [details, setDetails] = useState<ethereum.Details>()
-  const [contract, setContract] = useState<main.Main>()
+  const [main_contract, setMainContract] = useState<main.Main>()
+
   useAffect(async () => {
     const details_ = await ethereum.connect('metamask')
     if (!details_) return
     setDetails(details_)
     const contract_ = await main.init(details_)
     if (!contract_) return
-    setContract(contract_)
+    setMainContract(contract_)
   }, [])
   return useMemo(() => {
-    if (!details || !contract) return
-    return { details, contract }
-  }, [details, contract])
+    if (!details || !main_contract) return
+    return { details, contract: main_contract }
+  }, [details, main_contract])
 }
 
 async function fetchPokemon() {
@@ -75,7 +76,7 @@ export const App = () => {
   if (wallet?.details.account != null) {
     let acount = wallet?.details.account
     console.log(wallet?.contract)
-    console.log(wallet?.contract.getMessage())
+    console.log(wallet?.contract.createCollection("collection1"))
 
   }
 

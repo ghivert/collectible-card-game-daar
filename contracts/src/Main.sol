@@ -6,46 +6,29 @@ pragma solidity ^0.8.20;
 import "./Collection.sol";
 import "./Ownable.sol";
 import "./PokemonOwenrship.sol";
-import "./Ownable.sol";
 
 contract Main  is  Ownable{
   int private count;
+  address admin;
+  mapping(int => Collection) public pokemonCollections;
 
-
-  mapping(int => Collection) public collections;
-
-  mapping(address => address) public userCollection;
-
-  constructor() {
+  constructor()  Ownable() {
     count = 0;
   }
 
-  function createCollection(string memory name, int cardCount)  public{
-    // on cree la colleciton
-    collections[count++] = new Collection(name, cardCount);
-  }
-
-  function create_collection_then_assign_to_user(address user_adress) public     {
-    string memory collectionName = "collection name";
-
-    createCollection(collectionName, 0);
-    address collection_address = address(collections[count - 1]);
-    assign_cardPokemon(user_adress, collection_address);
+  function createCollection(string memory name) public  onlyOwner(){
+    pokemonCollections[count++] = new Collection(name, 0);
   }
 
   function getMessage() public view returns (string memory) {
         return "Hello World";
-    }
-
-
-  /** Assign to a user some collection.
-   * 
-   */
-  function assign_cardPokemon(address user_adress, address collection_adresse)  public{
-    userCollection[user_adress]=collection_adresse;
   }
-
-   
-
+  /**
+    Add a carte to a collection 
+   */
+  function add_carte_to_collection(int collection_int, string memory url_carte) public  onlyOwner  {
+    pokemonCollections[collection_int].addCarte(url_carte);
+  }
+  
 
 }

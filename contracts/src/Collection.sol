@@ -10,12 +10,17 @@ import "./Ownable.sol";
 contract Collection  is ERC721, Ownable{ 
   string public name;
   int public cardCount;  
+  mapping(int  => string) pokmeons;
 
   constructor(string memory _name, int _cardCount) {
     name = _name;
     cardCount = _cardCount;
   }
-
+  function addCarte(string memory id) public onlyOwner  {
+    pokmeons[cardCount]=id;
+    cardCount++;
+  }
+  
   /*
     Returns the number of tokens in owner's account.
   */
@@ -41,6 +46,31 @@ contract Collection  is ERC721, Ownable{
     
   }
 
+  function supportsInterface(bytes4 interfaceId) external view returns (bool){
+    
+  }
+
 
 
 }
+
+
+
+/*
+
+  Main: 
+    - Collections
+        - Collection1
+            - Pokemon1
+                - meta_donnee (id_sur_api)
+            - Pokemon2
+            - Pokemon3
+            ...
+            - Pokemonn
+        - Collection2
+        - Coollection3
+    - pokemon_ownership: mapping (owner_address => pokemon_adress)
+
+
+
+*/

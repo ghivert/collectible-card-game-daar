@@ -6,7 +6,7 @@ import "./Ownable.sol";
 contract PokemonOwenership is ERC721, Ownable {
 
   mapping(address => uint256) user_pokemon;  //collection ou chaque (id  --->  url pokemon dans l'api)
-  mapping(uint256 => address) pokemon_user; //collection ou chaque user a un uint 
+  mapping(uint256 => address) pokemon_user;  //collection ou chaque user a un uint 
   
   /**
   Can only be called by the contract creator
@@ -46,7 +46,11 @@ contract PokemonOwenership is ERC721, Ownable {
     
   }
 
- modifier onlyOwnerOf(uint  _token) {
+   function supportsInterface(bytes4 interfaceId) external view returns (bool){
+    
+  }
+
+  modifier onlyOwnerOf(uint  _token) {
     require(msg.sender == pokemon_user[_token]);
     _;
   }
