@@ -22,9 +22,40 @@ const getAllCollections = async () => {
     ];
 }
 
+/** Returns an array of collections labels
+ * Do not return the collection items, return only the name.
+ * @returns 
+ */
+const getAllCollectionsMetadata = async () => {
+    const collectionsMetaData = data.cards.map((pokemon: any) => {
+        const collectionName = pokemon.set;
+        const collectionId = pokemon.setCode;
+        const collectionSize = data.cards.filter((pokemon: any) => pokemon.setCode === collectionId).length;
+        return {name:collectionName, id:collectionId, size:collectionSize};
+    });
+    // delete duplicates
+    const uniqueCollections = collectionsMetaData.filter((collection, index, self) =>
+        index === self.findIndex((t) => (
+            t.id === collection.id
+        ))
+    )
+    return uniqueCollections;
+}
+
+const getCollectionById = async (id: string) => {
+    console.log("getCollectionById: ", id);
+    
+    const res = data.cards.filter((pokemon: any) => pokemon.setCode === id );    
+    console.log("res ", res);
+    
+    return res;
+}
+
 
 export {
     getAllPokemon,
     getAllCollections,
-    getPokemonById
+    getPokemonById,
+    getAllCollectionsMetadata,
+    getCollectionById
 }

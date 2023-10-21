@@ -1,6 +1,6 @@
 import { getPokemonById } from '@/services/api-service/pokemon.service'
 import React, { useEffect, useId, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { PokemonCard } from '../pokemon-list/PokemonList.component'
 import './PokemonDetails.style.css'
 

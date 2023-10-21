@@ -17,7 +17,7 @@ const PokemonCard = (props: any) => {
 }
 
 const PokemonList = props => {
-  const listeDeCartes = props.cartes ?? []
+  const listeDeCartes = props.cards ?? []
   const cartes = Object.values(listeDeCartes)
 
   return (
