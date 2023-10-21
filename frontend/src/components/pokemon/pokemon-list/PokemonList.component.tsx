@@ -1,6 +1,7 @@
 import POKEMON_IMG_SAMPLE from '@/const'
 import React from 'react'
 import './PokemonList.css' // Import your CSS file
+import { Link } from 'react-router-dom'
 
 const PokemonCard = (props: any) => {
   return (
@@ -15,8 +16,7 @@ const PokemonCard = (props: any) => {
   )
 }
 
-const PokemonList = (props: any) => {
-  // Check if props.cartes is defined before trying to access its properties
+const PokemonList = props => {
   const listeDeCartes = props.cartes ?? []
   const cartes = Object.values(listeDeCartes)
 
@@ -25,7 +25,10 @@ const PokemonList = (props: any) => {
       <ul className="pokemon-list">
         {cartes.map((data, index) => (
           <li key={index}>
-            <PokemonCard data={data} />
+            <Link to={`/pokemon/${data.id}`}>
+              {' '}
+              <PokemonCard data={data} />
+            </Link>
           </li>
         ))}
       </ul>
@@ -33,4 +36,4 @@ const PokemonList = (props: any) => {
   )
 }
 
-export default PokemonList
+export { PokemonList, PokemonCard }

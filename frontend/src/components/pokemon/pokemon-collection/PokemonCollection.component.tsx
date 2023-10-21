@@ -1,5 +1,5 @@
 import React from 'react'
-import PokemonList from '../pokemon-list/PokemonList.component'
+import { PokemonList } from '../pokemon-list/PokemonList.component'
 
 const PokemonCollection = props => {
   return (

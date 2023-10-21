@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
-import PokemonList from './components/pokemon-list/PokemonList.component'
 import React from 'react'
 import { POKEMON_API_URL } from './const'
 import { Router, Link, Route, BrowserRouter, Routes } from 'react-router-dom'
 import Home from './components/home/Home.component'
 import Layout from './pages/Layout'
-import PokemonCollection, {
-  PokemonCollectionsPresenter,
-} from './components/pokemon-collection/PokemonCollection.component'
 import {
   getAllCollections,
   getAllPokemon,
 } from './services/api-service/pokemon.service'
 import User from './components/user/User.component'
+import PokemonDetails from './components/pokemon/pokemon-details/PokemonDetails.component'
+import { PokemonCollectionsPresenter } from './components/pokemon/pokemon-collection/PokemonCollection.component'
 
 export const App = () => {
   const [pokemonData, setPokemonData] = useState({})
@@ -31,7 +29,7 @@ export const App = () => {
       }
     })
     setName('Aboubacar')
-  })
+  }, [])
 
   return (
     <BrowserRouter>
@@ -45,6 +43,7 @@ export const App = () => {
               <PokemonCollectionsPresenter allCollections={allCollections} />
             }
           />
+          <Route path="/pokemon/:id" element={<PokemonDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>

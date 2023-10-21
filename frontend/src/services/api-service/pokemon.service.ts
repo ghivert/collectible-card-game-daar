@@ -5,6 +5,11 @@ const getAllPokemon = async () => {
 }
 
 
+const getPokemonById = async (id: string) => {
+    return data.cards.find((pokemon: any) => pokemon.id === id);
+}
+
+
 const getAllCollections = async () => {
     // divide the data.cards into 3 collections
     const collection1 = data.cards.slice(0, 10);
@@ -20,5 +25,6 @@ const getAllCollections = async () => {
 
 export {
     getAllPokemon,
-    getAllCollections
+    getAllCollections,
+    getPokemonById
 }
