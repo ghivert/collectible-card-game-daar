@@ -46,12 +46,22 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
   /**
    Returns the account approved for tokenId token.
    */
-  function approve(address _approved, uint256 _tokenId) public virtual  override payable {
-    
+  function approve(address _approved, uint256 _tokenId) public onlyOwnerOf(_tokenId) override payable {
+    require(_approved != address(0), "Invalid address");
+    require(_approved != ownerOf(_tokenId), "You can't approve yourself");
+    _approve(_approved, _tokenId);
   }
 
-   function supportsInterface(bytes4 interfaceId) external view returns (bool){
-    
+  function getCards() public  returns(uint256[] memory) {
+    uint256[] memory cards = new uint256[](balanceOf(msg.sender));
+    uint256 counter = 0; 
+    for (uint256 i = 0; i < cards.length; i++) {
+      if (pokemon_user[i] == msg.sender) {
+        cards[counter] = i;
+        counter++;
+      }
+    }
+    return cards;
   }
 
   modifier onlyOwnerOf(uint  _token) {

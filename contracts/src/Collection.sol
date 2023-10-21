@@ -7,54 +7,26 @@ import "./Pokemon.sol";
 import "./erc721.sol";
 import "./Ownable.sol";
 
-contract Collection  is ERC721, Ownable{ 
+contract Collection  is  Ownable{ 
   string public name;
-  int public cardCount;  
+  int public cardCount;  //taile de la colection
+  int  private counter ;
   mapping(int  => string) public  pokmeons;
 
   constructor(string memory _name, int _cardCount) {
     name = _name;
     cardCount = _cardCount;
+    counter=0;
   }
-  function addCarte(string memory id) public onlyOwner{
-    pokmeons[cardCount]=id;
-    cardCount++;
+  function addCarte(string memory url) public {
+    pokmeons[counter]=url;
+    counter++;
   }
 
   function getPokemonById(int index) public view returns (string memory) {
     require(index >= 0 && index < cardCount, "Invalid index");
     return pokmeons[index];
 }
-  
-  /*
-    Returns the number of tokens in owner's account.
-  */
-  function balanceOf(address _owner)  public virtual override   returns (uint256) {   
-  }
-
-  /**
-  Returns the owner of the tokenId token.
-  */
-  function ownerOf(uint256 _tokenId) public virtual  override returns (address) {
-  }
-
-  /**
-  Transfers tokenId token from from to to.
-  */
-  function transferFrom(address _from, address _to, uint256 _tokenId) public virtual override payable {
-  }
-
-  /**
-   Returns the account approved for tokenId token.
-   */
-  function approve(address _approved, uint256 _tokenId) public virtual  override payable {
-    
-  }
-
-  function supportsInterface(bytes4 interfaceId) external view returns (bool){
-    
-  }
-
 
 
 }
