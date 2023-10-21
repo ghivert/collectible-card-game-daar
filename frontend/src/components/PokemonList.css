@@ -1,0 +1,34 @@
+/* PokemonList.css */
+
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap; /* Wrap cards to next row when there are more than 4 */
+    justify-content: center; /* Center cards horizontally in container */
+}
+
+.pokemon-card {
+    margin: 5px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: fit-content; /* Set a fixed width for the card */
+    text-align: center;
+  }
+  
+  .pokemon-image {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  
+  .pokemon-name {
+    font-weight: lighter;
+  }
+  
+  /* PokemonList.css */
+
+.pokemon-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+  }
+  
