@@ -20,7 +20,9 @@ contract Main is Ownable{
     pokemonCollections[0].addCarte('xy7-10');
     pokemonCollections[1].addCarte('xy7-10');
     count=2;
-    pokemonownership = new PokemonOwenership();  }
+    pokemonownership = new PokemonOwenership();
+    pokemonownership.mint(msg.sender, 'xy7-10');
+  }
   /**
   Create new collection 
   Chaque modification de l'état du contrat (ajout de cartes, modification de propriétés, etc.) nécessite 
