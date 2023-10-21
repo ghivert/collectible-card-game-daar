@@ -11,7 +11,7 @@ contract Main is Ownable{
   int private count;
   address private admin;
   mapping(int => Collection) public pokemonCollections;
-
+  PokemonOwenership public pokemonownership;
   constructor() {
     count = 0;
     admin = msg.sender;
@@ -20,7 +20,7 @@ contract Main is Ownable{
     pokemonCollections[0].addCarte('xy7-10');
     pokemonCollections[1].addCarte('xy7-10');
     count=2;
-  }
+    pokemonownership = new PokemonOwenership();  }
   /**
   Create new collection 
   Chaque modification de l'état du contrat (ajout de cartes, modification de propriétés, etc.) nécessite 
@@ -45,7 +45,7 @@ contract Main is Ownable{
   /**
     Get ALL COLECTION 
    */
-  function allCollections() public onlySuperAdmin() view returns (Collection[] memory)  {
+  function allCollections() public  view returns (Collection[] memory)  {
         Collection[] memory collections = new Collection[](uint256(count));
         uint256 counter =0;
         for (int i = 0; i < count; i++) {
@@ -73,6 +73,15 @@ contract Main is Ownable{
       }
 
       return result;
+  }
+
+  function balanceOf_(address _owner) public  view  returns(uint256){
+    //return pokemonownership.balanceOf(_owner);
+  }
+
+  function owner_of_(string memory _tokenId) public view returns (address){
+       return pokemonownership.ownerOf(_tokenId);
+
   }
 
   function getMessage() public view returns (string memory) {

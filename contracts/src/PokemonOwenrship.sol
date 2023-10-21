@@ -10,9 +10,12 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
 }
   mapping(int => PokemonData) pokemon_user;  //pokemon url and user adress
   int size_map ;
+
+
   constructor()
   { size_map=0;
   }
+
    /*
    * @dev reate and assign a new token to a specific address.
    */
@@ -21,15 +24,14 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
         url: amount,
         userAddress: receiver
     });
-
     pokemon_user[size_map] = newPokemon;
     size_map++;
-   }
+  }
 
   /*
     Returns the number of tokens in owner's account.
   */
-  function balanceOf(address _owner)  public virtual override   returns (uint256) {   
+  function balanceOf(address _owner)  public virtual  view override   returns (uint256) {   
     uint256  counter =0;
     for (int i=0; i<size_map;i++){
       if (pokemon_user[i].userAddress==_owner){
@@ -42,7 +44,7 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
   /**
   Returns the owner of the tokenId token.
   */
-  function ownerOf(string memory _tokenId) public virtual  override returns (address) {
+  function ownerOf(string memory _tokenId) public virtual view  override returns (address) {
        for (int i=0; i<size_map;i++){
       if (keccak256(abi.encodePacked(pokemon_user[i].url))== keccak256(abi.encodePacked(_tokenId))){
           return pokemon_user[i].userAddress;
@@ -63,13 +65,13 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
       }
       emit Transfer(_from, _to, _tokenId);  //* ! 
   }
+  
   /**
    Returns the account approved for tokenId token.
    */
   function approve(address _approved, uint256 _tokenId) public  override payable {
 
   }
-
 
   /**
    modifier onlyOwnerOf(uint  _token) {

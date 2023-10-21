@@ -80,14 +80,14 @@ export const App = () => {
    // wallet?.contract.createCollection('col1')  ///fail 
     //retrun adress collection only if super_admin col1= 0: "0xd8058efe0198ae9dD7D563e1b4938Dcbc86A1F81"
     //and col2= "0x6D544390Eb535d61e196c87d6B9c80dCD8628Acd"
-    const value = wallet?.contract.allCollections() 
-    console.log(value)
-    const value2= wallet?.contract.allPokemonsOfCollection(0);  //retturn all adress(url) pokemon of one collection
-    console.log(value2)   // pokemon_url ="xy7-10"
+    //const value = wallet?.contract.allCollections() 
+    //console.log(value)
+   // const value2= wallet?.contract.allPokemonsOfCollection(0);  //retturn all adress(url) pokemon of one collection
+   // console.log(value2)   // pokemon_url ="xy7-10"
    // wallet?.contract.add_carte_to_collection(1,'dp6-90')  //TRANFERT LA COLLECTION A UN  USER  cela se fait de manière infinie 
     //const value3= wallet?.contract.allPokemonsOfCollection(1);   
     //console.log(value3)
-
+    console.log(wallet?.contract.owner_of_('xy7-10'))
   }
 
 
