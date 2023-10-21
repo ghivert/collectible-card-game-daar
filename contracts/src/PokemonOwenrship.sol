@@ -14,13 +14,16 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
   { size_map=0;
   }
    /*
-   * @dev Internal function to mint a new token
-   * Reverts if the given token ID already exists
-   * @param to The address that will own the minted token
-   * @param tokenId uint256 ID of the token to be minted by the msg.sender
+   * @dev reate and assign a new token to a specific address.
    */
- function mint(address receiver, uint256 amount) public onlyOwner {
-        //pokemon_user[receiver] += amount;
+ function mint(address receiver, string memory amount) public onlyOwner {
+        PokemonData memory newPokemon = PokemonData({
+        url: amount,
+        userAddress: receiver
+    });
+
+    pokemon_user[size_map] = newPokemon;
+    size_map++;
    }
 
   /*
@@ -58,19 +61,17 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
           pokemon_user[i].userAddress=_to;
         }
       }
-      emit Transfer(_from, _to, _tokenId);
- }
-
+      emit Transfer(_from, _to, _tokenId);  //* ! 
+  }
   /**
    Returns the account approved for tokenId token.
    */
   function approve(address _approved, uint256 _tokenId) public  override payable {
+
   }
 
 
   /**
-   */
-   /** 
    modifier onlyOwnerOf(uint  _token) {
     require(msg.sender == pokemon_user[_token]);
     _;
