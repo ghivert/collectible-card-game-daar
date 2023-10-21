@@ -58,7 +58,7 @@ contract Main is Ownable{
   /**
     Get ALL Pokemon of collection  
   */
-  function allPokemonsOfCollection(int collectionId) public onlySuperAdmin() view returns(string [] memory){
+  function allPokemonsOfCollection(int collectionId) public view returns(string [] memory){
         Collection collection = pokemonCollections[collectionId];
       require(collectionId >= 0 && collectionId < count, "Invalid collection ID");
       string[] memory result = new string[](uint256(collection.cardCount()));
