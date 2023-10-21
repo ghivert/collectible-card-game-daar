@@ -87,7 +87,7 @@ export const App = () => {
    // wallet?.contract.add_carte_to_collection(1,'dp6-90')  //TRANFERT LA COLLECTION A UN  USER  cela se fait de manière infinie 
     //const value3= wallet?.contract.allPokemonsOfCollection(1);   
     //console.log(value3)
-    console.log(wallet?.contract.owner_of_('xy7-10'))
+    console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
 
 
