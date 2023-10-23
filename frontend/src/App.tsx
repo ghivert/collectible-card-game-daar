@@ -75,10 +75,10 @@ export const App = () => {
    console.log('Le bouton a été cliqué !');
    if (wallet?.details.account != null) {
         console.log(wallet?.contract.getMessage());
-        (wallet?.contract.createCollection("col1")).then((result : any) => {
+        (wallet?.contract.createCollection("col1")).then((result : any) => { //fail
             console.log(result);
             const value3 = wallet?.contract.allPokemonsOfCollection(0);  
-            console.log(value3)
+            console.log(value3);
         }).catch((error : any) => {
             console.log(error)
         });
