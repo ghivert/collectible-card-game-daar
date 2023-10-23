@@ -26,11 +26,11 @@ contract Main is Ownable{
    Cela garantit l'intégrité des données et assure que toutes les parties de la blockchain sont synchronisées avec 
    la même version du contrat.
   */
-  function createCollection(string memory name) public  returns(Collection){
+  function createCollection(string memory name)  external returns(string memory){
     Collection collection = new Collection(name, 1);
     pokemonCollections[count]=collection;
     count++;
-    return collection;
+    return name;
   }
 
   /**

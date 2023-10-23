@@ -64,29 +64,29 @@ async function fetchPokemon() {
 }
 
 export const App = () => {
-
   let [pokemonData, setPokemonData] = useState({});
 
   useEffect(() => {
     fetchPokemon().then(data => setPokemonData(data));
-
   }, [])
-  const wallet = useWallet()
+
+  const wallet = useWallet();
   const handleClick = () => {
    console.log('Le bouton a été cliqué !');
    if (wallet?.details.account != null) {
-    //let acount = wallet?.details.account
-    //console.log(wallet?.contract)
-    (wallet?.contract.createCollection("col1")).then((result : any) => {
-          console.log("oui")
-     }).catch((error : any) => {
-        console.log(error)
-    });
-    //wallet?.contract.add_carte_to_collection(0,'carte2')
-    //console.log(">>> carte ajoutée ");
-    //const value3 = wallet?.contract.allPokemonsOfCollection(0);   
-    //value3.then(console.log)
-    //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
+        console.log(wallet?.contract.getMessage());
+        (wallet?.contract.createCollection("col1")).then((result : any) => {
+            console.log(result);
+            const value3 = wallet?.contract.allPokemonsOfCollection(0);  
+            console.log(value3)
+        }).catch((error : any) => {
+            console.log(error)
+        });
+        //wallet?.contract.add_carte_to_collection(0,'carte2')
+        //console.log(">>> carte ajoutée ");
+        //const value3 = wallet?.contract.allPokemonsOfCollection(0);   
+        //value3.then(console.log)
+        //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
   }
   return (
