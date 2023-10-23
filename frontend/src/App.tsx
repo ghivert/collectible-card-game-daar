@@ -54,8 +54,8 @@ async function fetchPokemon() {
     }
   };
   try {
-    const response = await fetch('https://api.pokemontcg.io/v1/cards?limit=10');
-    const userData = await response.json();
+    //const response = await fetch('https://api.pokemontcg.io/v1/cards?limit=10');
+    //const userData = await response.json();
     return {};
   } catch (error) {
     console.error('Erreur lors de la récupération des données:', error);
@@ -69,33 +69,32 @@ export const App = () => {
 
   useEffect(() => {
     fetchPokemon().then(data => setPokemonData(data));
-  })
 
-
+  }, [])
   const wallet = useWallet()
-  if (wallet?.details.account != null) {
-    let acount = wallet?.details.account
-    console.log(wallet?.contract)
-    wallet?.contract.getMessage()
-   // wallet?.contract.createCollection('col1')  ///fail 
-    //retrun adress collection only if super_admin col1= 0: "0xd8058efe0198ae9dD7D563e1b4938Dcbc86A1F81"
-    //and col2= "0x6D544390Eb535d61e196c87d6B9c80dCD8628Acd"
-    //const value = wallet?.contract.allCollections() 
-    //console.log(value)
-   // const value2= wallet?.contract.allPokemonsOfCollection(0);  //retturn all adress(url) pokemon of one collection
-   // console.log(value2)   // pokemon_url ="xy7-10"
-   // wallet?.contract.add_carte_to_collection(1,'dp6-90')  //TRANFERT LA COLLECTION A UN  USER  cela se fait de manière infinie 
-    //const value3= wallet?.contract.allPokemonsOfCollection(1);   
-    //console.log(value3)
-    console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
+  const handleClick = () => {
+   console.log('Le bouton a été cliqué !');
+   if (wallet?.details.account != null) {
+    //let acount = wallet?.details.account
+    //console.log(wallet?.contract)
+    (wallet?.contract.createCollection("col1")).then((result : any) => {
+          console.log("oui")
+     }).catch((error : any) => {
+        console.log(error)
+    });
+    //wallet?.contract.add_carte_to_collection(0,'carte2')
+    //console.log(">>> carte ajoutée ");
+    //const value3 = wallet?.contract.allPokemonsOfCollection(0);   
+    //value3.then(console.log)
+    //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
-
-
+  }
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
       <div>
         <PokemonList cartes={pokemonData?.cards} />
+        <button  type="button"  onClick={handleClick}>Create collection</button>
       </div>
     </div>
   )

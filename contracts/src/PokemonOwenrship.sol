@@ -55,7 +55,6 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
   /**
   Transfers tokenId token from from to to.
   */
-
   function transferFrom(address _from, address _to, string memory  _tokenId) public  virtual override payable {
       for (int i =0; i<size_map; i++)
       {

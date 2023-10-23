@@ -7,21 +7,17 @@ import "./Collection.sol";
 import "./Ownable.sol";
 import "./PokemonOwenrship.sol";
 
+
 contract Main is Ownable{
   int private count;
   address private admin;
   mapping(int => Collection) public pokemonCollections;
   PokemonOwenership public pokemonownership;
+
   constructor() {
     count = 0;
     admin = msg.sender;
-    pokemonCollections[0] =new Collection("colectio1", 1);
-    pokemonCollections[1] =new Collection("colectio2", 1);
-    pokemonCollections[0].addCarte('xy7-10');
-    pokemonCollections[1].addCarte('xy7-10');
-    count=2;
     pokemonownership = new PokemonOwenership();
-    pokemonownership.mint(msg.sender, 'xy7-10');
   }
   /**
   Create new collection 
@@ -30,17 +26,17 @@ contract Main is Ownable{
    Cela garantit l'intégrité des données et assure que toutes les parties de la blockchain sont synchronisées avec 
    la même version du contrat.
   */
-  function createCollection(string memory name) public  onlySuperAdmin() {
-    Collection collection = new Collection(name, 10); //10 cards 
+  function createCollection(string memory name) public  returns(Collection){
+    Collection collection = new Collection(name, 1);
     pokemonCollections[count]=collection;
     count++;
+    return collection;
   }
 
   /**
     Add a carte to a collection 
    */
-  function add_carte_to_collection(int collection_id, string memory url_carte) public  onlySuperAdmin() {
-    //require(pokemonCollections[collection_id].);
+  function add_carte_to_collection(int collection_id, string memory url_carte) public{
     pokemonCollections[collection_id].addCarte(url_carte);
   }
 
@@ -61,24 +57,18 @@ contract Main is Ownable{
     Get ALL Pokemon of collection  
   */
   function allPokemonsOfCollection(int collectionId) public view returns(string [] memory){
-        Collection collection = pokemonCollections[collectionId];
-      require(collectionId >= 0 && collectionId < count, "Invalid collection ID");
+      Collection collection = pokemonCollections[collectionId];
       string[] memory result = new string[](uint256(collection.cardCount()));
       uint256 index = 0;
       for (int i = 0; i < collection.cardCount(); i++) {
           result[index] = collection.getPokemonById(i);
           index++;
       }
-      // Resize the result array to remove any empty slots
-      assembly {
-          mstore(result, index)
-      }
-
       return result;
   }
 
   function balanceOf_(address _owner) public  view  returns(uint256){
-    //return pokemonownership.balanceOf(_owner);
+    return pokemonownership.balanceOf(_owner);
   }
 
   function owner_of_(string memory _tokenId) public view returns (address){
