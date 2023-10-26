@@ -11,11 +11,23 @@ const PokemonCollection = props => {
   const name: string = props.data.name
   const size: number = props.data.size
   const id: string = props.data.id
+  const [imgUrl, setImgUrl] = useState('')
+
+  useEffect(() => {
+    fetch('https://api.pokemontcg.io/v1/sets/' + props.data.id).then(
+      async response => {
+        const res = await response.json()
+        setImgUrl(res.set.logoUrl)
+      }
+    )
+  }, [])
+
   return (
     <div className="pokemon-collection">
       <h3>
         {name} ({size})
       </h3>
+      <img src={imgUrl} />
     </div>
   )
 }
