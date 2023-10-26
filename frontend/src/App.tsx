@@ -4,11 +4,10 @@ import * as ethereum from '@/lib/ethereum'
 import * as main from '@/lib/main'
 import axios from 'axios';
 import PokemonList from './components/PokemonList.component';
+import { getAllCollections } from './services/pokemon.service';
+import { Wallet } from 'ethers';
 
-interface DonneesAPI {
-  propriete1: string;
-  propriete2: number;
-}
+
 type Canceler = () => void
 const useAffect = (
   asyncEffect: () => Promise<Canceler | void>,
@@ -65,42 +64,45 @@ async function fetchPokemon() {
 
 export const App = () => {
   let [pokemonData, setPokemonData] = useState({});
-
+  
   useEffect(() => {
     fetchPokemon().then(data => setPokemonData(data));
   }, [])
-
+  
   const wallet = useWallet();
-  const handleClick = () => {
-   console.log('Le bouton a été cliqué !');
+
+  const addOneCollection = (collection) => {
+   console.log("Ajout d'une collection " + collection.name);
    if (wallet?.details.account != null) {
-        wallet?.contract.getMessage().then(console.log)
-        wallet?.contract.createCollection2("col1").then(() => {
-              wallet?.contract.allCollections().then(console.log)
-            })
-            
-      /*
-        (wallet?.contract.createCollection("col1")).then((result : any) => { //fail
-            console.log(result);
-            const value3 = wallet?.contract.allPokemonsOfCollection(0);  
-            console.log(value3);
-        }).catch((error : any) =>{
-            console.log(error)
-        });
-        */
-        //wallet?.contract.add_carte_to_collection(0,'carte2')
-        //console.log(">>> carte ajoutée ");
-        //const value3 = wallet?.contract.allPokemonsOfCollection(0);   
-        //value3.then(console.log)
+        wallet?.contract.createCollection2(collection.name).then((data)=>{
+                console.log(data)
+                wallet?.contract.add_carte_to_collection(0, "carte1").then(console.log)
+              })
+            }
         //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
+
+  const addAllCollection = () => {    
+    getAllCollections().forEach(addOneCollection)
   }
+
+  const AddCarteToUser= ()=>{
+    console.log("mint card")
+    wallet?.contract.mint_(wallet?.details.account, "carte1").then(()=> {
+      wallet?.contract.owner_of_("carte1").then(console.log)
+    })
+  }
+
+
+
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
       <div>
         <PokemonList cartes={pokemonData?.cards} />
-        <button  type="button"  onClick={handleClick}>Create collection</button>
+        <button  type="button"  onClick={addAllCollection}>Create collection</button>
+        <button  type="button"  onClick={AddCarteToUser}>Mint card to user </button>
+
       </div>
     </div>
   )

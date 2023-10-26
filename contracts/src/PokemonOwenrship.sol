@@ -18,8 +18,9 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
 
    /*
    * @dev reate and assign a new token to a specific address.
+     OnlyOwner
    */
- function mint(address receiver, string memory amount) public onlyOwner {
+ function mint(address receiver, string memory amount) public  {
         PokemonData memory newPokemon = PokemonData({
         url: amount,
         userAddress: receiver
