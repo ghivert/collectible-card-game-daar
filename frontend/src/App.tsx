@@ -74,24 +74,20 @@ export const App = () => {
   const handleClick = () => {
    console.log('Le bouton a été cliqué !');
    if (wallet?.details.account != null) {
-        wallet?.contract.getMessage().then(console.log)
-        wallet?.contract.createCollection2("col1").then(() => {
+        wallet?.contract.createCollection2("col1").then(()=>{
               wallet?.contract.allCollections().then(console.log)
+              wallet?.contract.add_carte_to_collection(0,'carte2').then(()=>{
+                /**
+                 * Affiche les pokemons de la collection 0
+                 */
+                wallet?.contract.allPokemonsOfCollection(0).then(console.log)  
+                /**
+                 * Mint une carte a un pokemon 
+                 */
+                
+              })
             })
-            
-      /*
-        (wallet?.contract.createCollection("col1")).then((result : any) => { //fail
-            console.log(result);
-            const value3 = wallet?.contract.allPokemonsOfCollection(0);  
-            console.log(value3);
-        }).catch((error : any) =>{
-            console.log(error)
-        });
-        */
-        //wallet?.contract.add_carte_to_collection(0,'carte2')
-        //console.log(">>> carte ajoutée ");
-        //const value3 = wallet?.contract.allPokemonsOfCollection(0);   
-        //value3.then(console.log)
+    
         //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
   }
@@ -101,6 +97,7 @@ export const App = () => {
       <div>
         <PokemonList cartes={pokemonData?.cards} />
         <button  type="button"  onClick={handleClick}>Create collection</button>
+
       </div>
     </div>
   )

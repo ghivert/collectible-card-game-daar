@@ -28,7 +28,8 @@ contract Main is Ownable{
   */
   function createCollection2(string memory name)  external returns(Collection) {
     Collection collection = new Collection(name, 1);
-    pokemonCollections[count++]=collection;
+    pokemonCollections[count]=collection;
+    count++;
     return  collection;
   }
 
@@ -72,8 +73,10 @@ contract Main is Ownable{
 
   function owner_of_(string memory _tokenId) public view returns (address){
        return pokemonownership.ownerOf(_tokenId);
-
   }
+
+  
+
 
   function getMessage() public view returns (string memory) {
         return "Hello World";
