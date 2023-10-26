@@ -74,14 +74,22 @@ export const App = () => {
   const handleClick = () => {
    console.log('Le bouton a été cliqué !');
    if (wallet?.details.account != null) {
-        console.log(wallet?.contract.getMessage());
+        wallet?.contract.getMessage().then(console.log)
+        wallet?.contract.createCollection2("col1").then(() => {
+              wallet?.contract.allCollections().then(console.log)
+
+        })
+        
+      
+      /*
         (wallet?.contract.createCollection("col1")).then((result : any) => { //fail
             console.log(result);
             const value3 = wallet?.contract.allPokemonsOfCollection(0);  
             console.log(value3);
-        }).catch((error : any) => {
+        }).catch((error : any) =>{
             console.log(error)
         });
+        */
         //wallet?.contract.add_carte_to_collection(0,'carte2')
         //console.log(">>> carte ajoutée ");
         //const value3 = wallet?.contract.allPokemonsOfCollection(0);   
