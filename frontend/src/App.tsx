@@ -4,6 +4,7 @@ import * as ethereum from '@/lib/ethereum'
 import * as main from '@/lib/main'
 import axios from 'axios';
 import PokemonList from './components/PokemonList.component';
+import { getAllCollections } from './services/pokemon.service';
 
 interface DonneesAPI {
   propriete1: string;
@@ -65,38 +66,34 @@ async function fetchPokemon() {
 
 export const App = () => {
   let [pokemonData, setPokemonData] = useState({});
-
+  
   useEffect(() => {
     fetchPokemon().then(data => setPokemonData(data));
   }, [])
-
+  
   const wallet = useWallet();
-  const handleClick = () => {
-   console.log('Le bouton a été cliqué !');
+
+  const addOneCollection = (collection) => {
+   console.log("Ajout d'une collection " + collection.name);
    if (wallet?.details.account != null) {
-        wallet?.contract.createCollection2("col1").then(()=>{
-              wallet?.contract.allCollections().then(console.log)
-              wallet?.contract.add_carte_to_collection(0,'carte2').then(()=>{
-                /**
-                 * Affiche les pokemons de la collection 0
-                 */
-                wallet?.contract.allPokemonsOfCollection(0).then(console.log)  
-                /**
-                 * Mint une carte a un pokemon 
-                 */
-                
+        wallet?.contract.createCollection2(collection.name).then((data)=>{
+                console.log(data)
+                wallet?.contract.add_carte_to_collection(0, "carte1").then(console.log)
               })
-            })
-    
+            }
         //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
+
+  const addAllCollection = () => {
+    getAllCollections().forEach(addOneCollection)
   }
+
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
       <div>
         <PokemonList cartes={pokemonData?.cards} />
-        <button  type="button"  onClick={handleClick}>Create collection</button>
+        <button  type="button"  onClick={addAllCollection}>Create collection</button>
 
       </div>
     </div>

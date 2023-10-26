@@ -75,7 +75,7 @@ contract Main is Ownable{
        return pokemonownership.ownerOf(_tokenId);
   }
 
-  
+    
 
 
   function getMessage() public view returns (string memory) {
