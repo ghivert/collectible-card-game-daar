@@ -5,11 +5,9 @@ import * as main from '@/lib/main'
 import axios from 'axios';
 import PokemonList from './components/PokemonList.component';
 import { getAllCollections } from './services/pokemon.service';
+import { Wallet } from 'ethers';
 
-interface DonneesAPI {
-  propriete1: string;
-  propriete2: number;
-}
+
 type Canceler = () => void
 const useAffect = (
   asyncEffect: () => Promise<Canceler | void>,
@@ -84,9 +82,18 @@ export const App = () => {
         //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
   }
 
-  const addAllCollection = () => {
+  const addAllCollection = () => {    
     getAllCollections().forEach(addOneCollection)
   }
+
+  const AddCarteToUser= ()=>{
+    console.log("mint card")
+    wallet?.contract.mint_(wallet?.details.account, "carte1").then(()=> {
+      wallet?.contract.owner_of_("carte1").then(console.log)
+    })
+  }
+
+
 
   return (
     <div className={styles.body}>
@@ -94,6 +101,7 @@ export const App = () => {
       <div>
         <PokemonList cartes={pokemonData?.cards} />
         <button  type="button"  onClick={addAllCollection}>Create collection</button>
+        <button  type="button"  onClick={AddCarteToUser}>Mint card to user </button>
 
       </div>
     </div>
