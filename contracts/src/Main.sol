@@ -18,7 +18,6 @@ contract Main is Ownable{
     count = 0;
     admin = msg.sender;
     pokemonownership = new PokemonOwenership();
-    pokemonCollections[count++] = new Collection("collection 0", 12);
   }
   /**
   Create new collection 
@@ -27,18 +26,7 @@ contract Main is Ownable{
    Cela garantit l'intégrité des données et assure que toutes les parties de la blockchain sont synchronisées avec 
    la même version du contrat.
   */
-  function createCollection(string memory name)  external returns(Collection) {
-    Collection collection = new Collection(name, 1);
-    pokemonCollections[0]=collection;
-    return  collection;
-  }
-
   function createCollection2(string memory name)  external returns(Collection) {
-    Collection collection = new Collection(name, 1);
-    pokemonCollections[count++]=collection;
-    return  collection;
-  }
-  function createCollection3(string memory name)  external returns(Collection) {
     Collection collection = new Collection(name, 1);
     pokemonCollections[count++]=collection;
     return  collection;

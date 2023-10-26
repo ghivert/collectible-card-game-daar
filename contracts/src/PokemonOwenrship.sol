@@ -1,6 +1,6 @@
 pragma solidity ^0.8.19;
 
-import "./ERC721.sol";
+import "./erc721.sol";
 import "./Ownable.sol";
 
 contract PokemonOwenership  is Ownable ,ERC721{   //is erc721

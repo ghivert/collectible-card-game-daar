@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 
 import "./Ownable.sol";
 import "./Pokemon.sol";
-import "./ERC721.sol";
+import "./erc721.sol";
 import "./Ownable.sol";
 
 contract Collection  is  Ownable{ 

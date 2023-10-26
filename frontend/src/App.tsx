@@ -77,10 +77,8 @@ export const App = () => {
         wallet?.contract.getMessage().then(console.log)
         wallet?.contract.createCollection2("col1").then(() => {
               wallet?.contract.allCollections().then(console.log)
-
-        })
-        
-      
+            })
+            
       /*
         (wallet?.contract.createCollection("col1")).then((result : any) => { //fail
             console.log(result);
