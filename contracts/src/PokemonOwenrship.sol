@@ -7,7 +7,7 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
     struct PokemonData {
     string url;
     address userAddress;
-}
+  }
   mapping(int => PokemonData) pokemon_user;  //pokemon url and user adress
   int size_map ;
 
@@ -57,13 +57,13 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
   Transfers tokenId token from from to to.
   */
   function transferFrom(address _from, address _to, string memory  _tokenId) public  virtual override payable {
-      for (int i =0; i<size_map; i++)
-      {
-        if (keccak256(abi.encodePacked(pokemon_user[i].url))== keccak256(abi.encodePacked(_tokenId))){
-          pokemon_user[i].userAddress=_to;
-        }
+    for (int i =0; i<size_map; i++)
+    {
+      if (keccak256(abi.encodePacked(pokemon_user[i].url))== keccak256(abi.encodePacked(_tokenId))){
+        pokemon_user[i].userAddress=_to;
       }
-      emit Transfer(_from, _to, _tokenId);  //* ! 
+    }
+    emit Transfer(_from, _to, _tokenId);  //* ! 
   }
   
   /**
