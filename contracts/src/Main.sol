@@ -27,7 +27,7 @@ contract Main is Ownable{
    la même version du contrat.
   */
   function createCollection2(string memory name, string memory code)  external returns(Collection) {
-    Collection collection = new Collection(name, 1, code);
+    Collection collection = new Collection(name, 0, code);
     pokemonCollections[count]=collection;
     count++;
     return  collection;
@@ -60,9 +60,9 @@ contract Main is Ownable{
   */
   function allPokemonsOfCollection(int collectionId) public view returns(string [] memory){
       Collection collection = pokemonCollections[collectionId];
-      string[] memory result = new string[](uint256(collection.cardCount()));
+      string[] memory result = new string[](uint256(collection.counter()));
       uint256 index = 0;
-      for (int i = 0; i < collection.cardCount(); i++) {
+      for (int i = 0; i < collection.counter(); i++) {
           result[index] = collection.getPokemonById(i);
           index++;
       }
