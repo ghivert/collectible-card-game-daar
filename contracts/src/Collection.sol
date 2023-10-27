@@ -7,56 +7,31 @@ import "./Pokemon.sol";
 import "./ERC721.sol";
 import "./Ownable.sol";
 
-contract Collection  is  Ownable{ 
+contract Collection is Ownable {
   string public name;
   string public code;
-  int public cardCount;  //taile de la colection
-  int  public  counter ;
-  mapping(int  => string) public  pokmeons;
+  int public cardCount; //taile de la colection
+  int public counter;
+  mapping(int => string) public pokmeons;
 
   constructor(string memory _name, int _cardCount, string memory _code) {
     name = _name;
     cardCount = _cardCount;
-    counter=0;
+    counter = 0;
     code = _code;
   }
 
   function addCarte(string memory url) public {
-    pokmeons[counter]=url;
+    pokmeons[counter] = url;
     counter++;
   }
-
-
 
   function getPokemonById(int index) public view returns (string memory) {
     require(index >= 0 && index < counter, "Invalid index");
     return pokmeons[index];
+  }
+
+  function getCode() public view returns (string memory) {
+    return code;
+  }
 }
-
-function getCode() public view returns (string memory){
-    return  code;
-}
-
-
-}
-
-
-
-/*
-
-  Main: 
-    - Collections
-        - Collection1
-            - Pokemon1
-                - meta_donnee (id_sur_api)
-            - Pokemon2
-            - Pokemon3
-            ...
-            - Pokemonn
-        - Collection2
-        - Coollection3
-    - pokemon_ownership: mapping (owner_address => pokemon_adress)
-
-
-
-*/
