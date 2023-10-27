@@ -7,7 +7,7 @@ contract PokemonOwenership  is Ownable ,ERC721{   //is erc721
     struct PokemonData {
     string url;
     address userAddress;
-}
+  }
   mapping(int => PokemonData) pokemon_user;  //pokemon url and user adress
   int size_map ;
 

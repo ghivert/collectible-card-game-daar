@@ -75,9 +75,21 @@ contract Main is Ownable{
        return pokemonownership.ownerOf(_tokenId);
   }
 
-  function mint_(address _receiver,  string memory _card)public onlySuperAdmin{
+  function mint_(address _receiver,  string memory _card)public onlySuperAdmin() {
        pokemonownership.mint(_receiver, _card);
   }  
+
+
+   function transferFrom_(address _from, address _to, string memory  _tokenId) public  onlySuperAdmin() {
+      pokemonownership.transferFrom(_from, _to, _tokenId);
+  }
+
+  //One deployed: 
+  function create_all_Collection_from_api() public  onlySuperAdmin(){
+
+  }
+  
+
 
    modifier onlySuperAdmin() {
         require(msg.sender == admin, "Only Super Admin can call this function");

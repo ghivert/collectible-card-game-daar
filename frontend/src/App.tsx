@@ -76,7 +76,9 @@ export const App = () => {
    if (wallet?.details.account != null) {
         wallet?.contract.createCollection2(collection.name).then((data)=>{
                 console.log(data)
-                wallet?.contract.add_carte_to_collection(0, "carte1").then(console.log)
+                wallet?.contract.add_carte_to_collection(0, "carte1").then(()=>{
+                  wallet?.contract.allPokemonsOfCollection(0).then(console.log);
+                })
               })
             }
         //console.log(wallet?.contract.owner_of_('xy7-10')) // retourne le resultat adresss(0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266)
@@ -88,12 +90,17 @@ export const App = () => {
 
   const AddCarteToUser= ()=>{
     console.log("mint card")
-    wallet?.contract.mint_(wallet?.details.account, "carte1").then(()=> {
+     wallet?.contract.mint_(wallet?.details.account, "carte1").then(()=> {
       wallet?.contract.owner_of_("carte1").then(console.log)
+      wallet?.contract.balanceOf_(wallet?.details.account).then(console.log)
     })
   }
-
-
+  const TransferCard= ()=>{
+    console.log("Transfer card")
+    wallet?.contract.transferFrom_(wallet?.details.account, "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", 'carte1').then(()=> {
+      wallet?.contract.owner_of_("carte1").then(console.log);
+    })
+  }
 
   return (
     <div className={styles.body}>
@@ -102,6 +109,7 @@ export const App = () => {
         <PokemonList cartes={pokemonData?.cards} />
         <button  type="button"  onClick={addAllCollection}>Create collection</button>
         <button  type="button"  onClick={AddCarteToUser}>Mint card to user </button>
+        <button  type="button"  onClick={TransferCard}>Transfer card  </button>
 
       </div>
     </div>
