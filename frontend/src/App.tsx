@@ -97,6 +97,7 @@ export const App = () => {
   }
   const TransferCard= ()=>{
     console.log("Transfer card")
+    //Mint first 
     wallet?.contract.transferFrom_(wallet?.details.account, "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", 'carte1').then(()=> {
       wallet?.contract.owner_of_("carte1").then(console.log);
     })

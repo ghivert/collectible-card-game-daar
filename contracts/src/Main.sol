@@ -26,8 +26,8 @@ contract Main is Ownable{
    Cela garantit l'intégrité des données et assure que toutes les parties de la blockchain sont synchronisées avec 
    la même version du contrat.
   */
-  function createCollection2(string memory name)  external returns(Collection) {
-    Collection collection = new Collection(name, 1);
+  function createCollection2(string memory name, string memory code)  external returns(Collection) {
+    Collection collection = new Collection(name, 1, code);
     pokemonCollections[count]=collection;
     count++;
     return  collection;
@@ -43,14 +43,16 @@ contract Main is Ownable{
   /**
     Get ALL COLECTION 
    */
-  function allCollections() public view returns (Collection[] memory){
+  function allCollections() public view returns (string[] memory){
     Collection[] memory collections = new Collection[](uint256(count));
+    string[] memory codes = new string[](uint256(count));
     uint256 counter =0;
     for (int i = 0; i < count; i++) {
         collections[counter] = pokemonCollections[i];
+        codes[counter] = pokemonCollections[i].getCode();
         counter++;
     }
-    return collections; //adress de la collection !!
+    return codes; //names des collections 
   }
 
   /**
@@ -82,14 +84,7 @@ contract Main is Ownable{
 
    function transferFrom_(address _from, address _to, string memory  _tokenId) public  onlySuperAdmin() {
       pokemonownership.transferFrom(_from, _to, _tokenId);
-  }
-
-  //One deployed: 
-  function create_all_Collection_from_api() public  onlySuperAdmin(){
-
-  }
-  
-
+  }  
 
    modifier onlySuperAdmin() {
         require(msg.sender == admin, "Only Super Admin can call this function");
