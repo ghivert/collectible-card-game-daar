@@ -47,16 +47,17 @@ const deployer: DeployFunction = async hre => {
     console.log(transactionReceipt.logs[0])
     const contractAddress = transactionReceipt.logs[0].address;
     
-    console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);
-
-    await  main.mint(main.address,contractAddress );
-    const balceOf_avant=  await main.balanceOf(main.address);
+    // console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);
+    // console.log("balance avant le mint");
+    const fakeBalance = await main.cardCount(main.address);
+    console.log("fake balance: " + fakeBalance);
     
-    console.log("balance avant le mint");
-    console.log(balceOf_avant)    
-    const balance2 = await main.balanceOf(main.address);
+     //main.mint(main.address,contractAddress ).then(()=>{
+       
+       // main.balanceOf(main.address).then(console.log())
+    //  })
+    
     console.log("balance  après le mint");
-    console.log(balance2);
    // main.AllCardsUser_(main.address).then(console.log)
 }, 10000);
 }

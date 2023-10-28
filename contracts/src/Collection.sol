@@ -51,6 +51,10 @@ contract Collection {
     return balance;
   }
 
+  function getCardCount(address owner) external  returns (uint256) {
+    return 0;
+  }
+
   /**
       returns all cards of user 
    */

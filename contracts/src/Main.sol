@@ -87,6 +87,17 @@ contract Main is PokemonOwenership {
     return result;
   }
 
+
+  function cardCount(address userAdress) external returns(int) {
+    /*
+    uint256 count = 0;
+    for (int i = 0; i < collectionCount; i++) {
+      count = pokemonCollections[i].getCardCount(userAdress) + count;
+    }
+    */
+    
+    return 267;
+  }
   
   modifier onlySuperAdmin() {
     require(msg.sender == admin, "Only Super Admin can call this function");

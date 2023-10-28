@@ -6,7 +6,7 @@ pragma solidity ^0.8.19;
 abstract contract ERC721 {
   event Transfer(address indexed _from, address indexed _to, string _tokenId);
 
-  function balanceOf(address _owner) public  virtual returns (uint256);
+  function balanceOf(address _owner)   external virtual returns (int );
 
   function ownerOf(address _tokenId) public virtual returns (address);
 
