@@ -28,7 +28,6 @@ contract PokemonOwenership is  Ownable, ERC721
         break;
       }
     }
-   
   }
 
   /*

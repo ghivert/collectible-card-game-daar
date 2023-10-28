@@ -61,7 +61,7 @@ contract Main is PokemonOwenership {
     uint256 counter = 0;
     for (int i = 0; i < collectionCount; i++) {
       collections[counter] = pokemonCollections[i];
-     // codes[counter] = pokemonCollections[i].getCode();
+      codes[counter] = pokemonCollections[i].code();
       counter++;
     }
     return codes; //names des collections
