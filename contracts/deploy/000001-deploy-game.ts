@@ -38,7 +38,7 @@ const deployer: DeployFunction = async hre => {
   }, 7000);
 
   setTimeout(() => {
-    console.log("ajoute une carte a un utilisateur cartes"+main.address);
+    console.log("ajoute une carte a un utilisateur cartes");
     main.mint_(main.address, "base3-5")
     main.AllCardsUser_(main.address).then(console.log)
 }, 7000);
