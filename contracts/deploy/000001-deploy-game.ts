@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import { DeployFunction } from 'hardhat-deploy/types'
 import { getAllCards, getAllCollections } from '../services/pokemon.service'
+import { ethers } from 'ethers'
 
 const deployer: DeployFunction = async hre => {
   if (hre.network.config.chainId !== 31337) return
@@ -33,15 +34,25 @@ const deployer: DeployFunction = async hre => {
   
 
   setTimeout(() => {
-      console.log("affichage cartes");
+      console.log("affichage cartes de la collection 3");
       main.allPokemonsOfCollection(3).then(console.log)
   }, 7000);
 
-  setTimeout(() => {
-    console.log("ajoute une carte a un utilisateur cartes");
-    main.mint_(main.address, "base3-5")
-    main.AllCardsUser_(main.address).then(console.log)
-}, 7000);
+  setTimeout(async () => {
+    console.log(" creation de pokemon NFT");
+    const my_new_pokemon = await main.createPokemon2("cart1");
+    // Obtenez le hash de la transaction
+    const transactionHash = my_new_pokemon.hash;
+    const transactionReceipt = await hre.ethers.provider.getTransactionReceipt(transactionHash);
+    
+    const contractAddress = transactionReceipt.logs[0].address;
+    
+    console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);
+    console.log(" address du main "+ main.address);
+    await  main.mint_(main.address,contractAddress );
+    console.log("j ai terminé de mint ");
+   // main.AllCardsUser_(main.address).then(console.log)
+}, 10000);
 }
 
 const getCollectionFromApi = () => {

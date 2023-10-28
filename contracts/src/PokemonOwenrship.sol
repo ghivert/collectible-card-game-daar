@@ -2,14 +2,15 @@ pragma solidity ^0.8.19;
 
 import "./ERC721.sol";
 import "./Ownable.sol";
+import "./Pokemon.sol";
 
 contract PokemonOwenership is  Ownable,ERC721
 {
-  struct PokemonData {
-    string url;
+  struct PokemonData_user {
+    Pokemon url;  
     address userAddress;
   }
-  mapping(int => PokemonData) pokemon_user; //pokemon url and user adress
+  mapping(int => PokemonData_user) pokemon_user; //pokemon url and user adress
   int size_map;
 
   constructor() {
@@ -20,8 +21,8 @@ contract PokemonOwenership is  Ownable,ERC721
    * @dev reate and assign a new token to a specific address.
      OnlyOwner
    */
-  function mint(address receiver, string memory amount) public {
-    PokemonData memory newPokemon = PokemonData({
+  function mint(address receiver, Pokemon  amount) public {
+    PokemonData_user memory newPokemon = PokemonData_user({
       url: amount,
       userAddress: receiver
     });
@@ -100,7 +101,7 @@ contract PokemonOwenership is  Ownable,ERC721
     counter=0;
     for (int i = 0; i<size_map; i++){
       if (pokemon_user[i].userAddress==owner){
-          allcards[uint256(counter)]=pokemon_user[i].url;
+          allcards[uint256(counter)]=pokemon_user[i].url.getUrl();
           counter++;
       }
     }

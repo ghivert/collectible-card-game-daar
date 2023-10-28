@@ -6,6 +6,7 @@ pragma solidity ^0.8.19;
 import "./Collection.sol";
 import "./Ownable.sol";
 import "./PokemonOwenrship.sol";
+import "./Pokemon.sol";
 
 contract Main is Ownable {
   int private count;
@@ -26,14 +27,29 @@ contract Main is Ownable {
    Cela garantit l'intégrité des données et assure que toutes les parties de la blockchain sont synchronisées avec 
    la même version du contrat.
   */
-  function createCollection2(
-    string memory name,
-    string memory code
-  ) external returns (Collection) {
+  function createCollection2( string memory name,string memory code) external returns (Collection) {
     Collection collection = new Collection(name, 0, code);
     pokemonCollections[count] = collection;
     count++;
     return collection;
+  }
+
+  /**
+    Create Pokemon NFT then return only its address
+  */
+  function createPokemon(string memory url_) external  returns(address){
+    Pokemon p = new Pokemon(url_);
+    address a = address(p);
+    return a;
+  }
+
+  /**
+    Create Pokemon NFT then return only its address
+  */
+  function createPokemon2(string memory url_) external  returns(address){
+    Pokemon p = new Pokemon(url_);
+    address a = address(p);
+    return a;
   }
 
   /**
@@ -85,8 +101,8 @@ contract Main is Ownable {
     return pokemonownership.ownerOf(_tokenId);
   }
 
-  function mint_(address _receiver, string memory _card) public onlySuperAdmin {
-    pokemonownership.mint(_receiver, _card);
+  function mint_(address _receiver, address  _card) external {
+    //pokemonownership.mint(_receiver, _card);
   }
 
   function transferFrom_(address _from,address _to, string memory _tokenId) public onlySuperAdmin {

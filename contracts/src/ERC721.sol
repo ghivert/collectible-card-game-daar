@@ -1,7 +1,7 @@
 //SPDX-License-Identifier
 pragma solidity ^0.8.19;
 
-//import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
+//import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 abstract contract ERC721 {
   event Transfer(address indexed _from, address indexed _to, string _tokenId);
