@@ -41,8 +41,8 @@ contract Collection {
 
   /** Returns the number of nft owned by a user in the collection.
    */
-  function balanceOf(address owner) public   returns (uint256) {
-    uint256 balance = 0;
+  function balanceOf(address owner) public view returns (int) {
+    int  balance = 3;
     for (int i = 0; i < cardCount; i++){
       if (pokmeons[i].owner() == owner) {
         balance++;
@@ -51,9 +51,7 @@ contract Collection {
     return balance;
   }
 
-  function getCardCount(address owner) external  returns (uint256) {
-    return 0;
-  }
+ 
 
   /**
       returns all cards of user 

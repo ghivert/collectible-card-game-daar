@@ -19,8 +19,6 @@ const deployer: DeployFunction = async hre => {
     console.log("fin collecttion");
     console.log(collections);
   }, 3000);
-
-
   setTimeout(() => {
     //ajout des pokemons dans la blockchain
     console.log("insertion des cartes");
@@ -40,25 +38,15 @@ const deployer: DeployFunction = async hre => {
 
   setTimeout(async () => {
     console.log(" creation de pokemon NFT");
-    const my_new_pokemon = await main.createPokemon2("cart1");
-    // Obtenez le hash de la transaction
-    const transactionHash = my_new_pokemon.hash;
-    const transactionReceipt = await hre.ethers.provider.getTransactionReceipt(transactionHash);
-    console.log(transactionReceipt.logs[0])
-    const contractAddress = transactionReceipt.logs[0].address;
-    
-    // console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);
-    // console.log("balance avant le mint");
-    const fakeBalance = await main.cardCount(main.address);
-    console.log("fake balance: " + fakeBalance);
-    
-     //main.mint(main.address,contractAddress ).then(()=>{
-       
-       // main.balanceOf(main.address).then(console.log())
-    //  })
+    main.createPokemon2("cart1").then(()=>{
+      main.allCollections().then(console.log)
+    })
+  
+     main.mint(main.address, "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266" ).then(()=>{
+         main.balanceOf(main.address).then(console.log)
+     })
     
     console.log("balance  après le mint");
-   // main.AllCardsUser_(main.address).then(console.log)
 }, 10000);
 }
 

@@ -19,10 +19,6 @@ contract Main is PokemonOwenership {
 
   /**
   Create new collection 
-  Chaque modification de l'état du contrat (ajout de cartes, modification de propriétés, etc.) nécessite 
-  une transaction sur la blockchain, et chaque transaction doit être validée et confirmée par le réseau Ethereum.
-   Cela garantit l'intégrité des données et assure que toutes les parties de la blockchain sont synchronisées avec 
-   la même version du contrat.
   */
   function createCollection2( string memory name,string memory code) external returns (Collection) {
     Collection collection = new Collection(name, 0, code);
@@ -88,19 +84,26 @@ contract Main is PokemonOwenership {
   }
 
 
-  function cardCount(address userAdress) external returns(int) {
+  function cardCount(address userAdress) pure external returns(int) {
     /*
     uint256 count = 0;
     for (int i = 0; i < collectionCount; i++) {
       count = pokemonCollections[i].getCardCount(userAdress) + count;
     }
     */
-    
     return 267;
   }
-  
+
+  function balanceOf(address _owner) public virtual view override returns (int) {
+       int value = super.balanceOf(_owner);
+       return value;
+  }
+
   modifier onlySuperAdmin() {
     require(msg.sender == admin, "Only Super Admin can call this function");
     _;
   }
+
+
+
 }
