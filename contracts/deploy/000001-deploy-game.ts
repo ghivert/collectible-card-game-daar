@@ -36,6 +36,12 @@ const deployer: DeployFunction = async hre => {
       console.log("affichage cartes");
       main.allPokemonsOfCollection(3).then(console.log)
   }, 7000);
+
+  setTimeout(() => {
+    console.log("ajoute une carte a un utilisateur cartes"+main.address);
+    main.mint_(main.address, "base3-5")
+    main.AllCardsUser_(main.address).then(console.log)
+}, 7000);
 }
 
 const getCollectionFromApi = () => {

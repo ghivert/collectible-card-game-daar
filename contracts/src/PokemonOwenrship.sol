@@ -3,9 +3,7 @@ pragma solidity ^0.8.19;
 import "./ERC721.sol";
 import "./Ownable.sol";
 
-contract PokemonOwenership is
-  Ownable,
-  ERC721 //is erc721
+contract PokemonOwenership is  Ownable,ERC721
 {
   struct PokemonData {
     string url;
@@ -49,9 +47,7 @@ contract PokemonOwenership is
   /**
   Returns the owner of the tokenId token.
   */
-  function ownerOf(
-    string memory _tokenId
-  ) public view virtual override returns (address) {
+  function ownerOf(string memory _tokenId) public view virtual override returns (address) {
     for (int i = 0; i < size_map; i++) {
       if (
         keccak256(abi.encodePacked(pokemon_user[i].url)) ==
@@ -88,6 +84,29 @@ contract PokemonOwenership is
     address _approved,
     uint256 _tokenId
   ) public payable override {}
+
+  /**
+  Returns all cards of user 
+  */
+
+  function AllCardsUser(address owner) public view returns  (string [] memory){
+    int counter =0;
+    for (int i = 0; i<size_map; i++){
+      if (pokemon_user[i].userAddress==owner){
+        counter++;
+      }
+    }
+    string [] memory allcards = new  string[](uint256(counter));
+    counter=0;
+    for (int i = 0; i<size_map; i++){
+      if (pokemon_user[i].userAddress==owner){
+          allcards[uint256(counter)]=pokemon_user[i].url;
+          counter++;
+      }
+    }
+    return allcards;
+  }
+
 
   /**
    modifier onlyOwnerOf(uint  _token) {

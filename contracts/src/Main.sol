@@ -89,12 +89,13 @@ contract Main is Ownable {
     pokemonownership.mint(_receiver, _card);
   }
 
-  function transferFrom_(
-    address _from,
-    address _to,
-    string memory _tokenId
-  ) public onlySuperAdmin {
+  function transferFrom_(address _from,address _to, string memory _tokenId) public onlySuperAdmin {
     pokemonownership.transferFrom(_from, _to, _tokenId);
+  }
+
+
+  function AllCardsUser_(address owner) public  view returns (string [] memory) {
+     return pokemonownership.AllCardsUser(owner);
   }
 
   modifier onlySuperAdmin() {
