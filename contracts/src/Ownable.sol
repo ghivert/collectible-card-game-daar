@@ -1,5 +1,7 @@
 pragma solidity ^0.8.19;
 
+import "./ERC721.sol";
+
 /**
  * @title Ownable
  * @dev The Ownable contract has an owner address, and provides basic authorization control
@@ -27,6 +29,16 @@ contract Ownable {
    */
   function owner() public view returns (address) {
     return _owner;
+  }
+
+  /** Cehck if the nft has an owner or not
+   */
+  function hasOwner() public view returns (bool){
+    return _owner != address(0);
+  }
+
+  function setOwner(address _newOwner) external {
+    _owner = _newOwner;
   }
 
   /**

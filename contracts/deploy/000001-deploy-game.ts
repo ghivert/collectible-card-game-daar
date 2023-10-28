@@ -44,13 +44,19 @@ const deployer: DeployFunction = async hre => {
     // Obtenez le hash de la transaction
     const transactionHash = my_new_pokemon.hash;
     const transactionReceipt = await hre.ethers.provider.getTransactionReceipt(transactionHash);
-    
+    console.log(transactionReceipt.logs[0])
     const contractAddress = transactionReceipt.logs[0].address;
     
     console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);
-    console.log(" address du main "+ main.address);
-    await  main.mint_(main.address,contractAddress );
-    console.log("j ai terminé de mint ");
+
+    await  main.mint(main.address,contractAddress );
+    const balceOf_avant=  await main.balanceOf(main.address);
+    
+    console.log("balance avant le mint");
+    console.log(balceOf_avant)    
+    const balance2 = await main.balanceOf(main.address);
+    console.log("balance  après le mint");
+    console.log(balance2);
    // main.AllCardsUser_(main.address).then(console.log)
 }, 10000);
 }

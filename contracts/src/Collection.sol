@@ -4,14 +4,14 @@ pragma solidity ^0.8.19;
 
 import "./Ownable.sol";
 import "./ERC721.sol";
-import "./Ownable.sol";
+import "./Pokemon.sol";
 
-contract Collection is Ownable {
+contract Collection {
   string public name;
   string public code;
   int public cardCount; //taile de la colection
   int public counter;
-  mapping(int => string) public pokmeons;
+  mapping(int => Pokemon ) public pokmeons;
 
   constructor(string memory _name, int _cardCount, string memory _code) {
     name = _name;
@@ -20,17 +20,52 @@ contract Collection is Ownable {
     code = _code;
   }
 
-  function addCarte(string memory url) public {
+  function addCarte( Pokemon url) public {
     pokmeons[counter] = url;
     counter++;
   }
 
-  function getPokemonById(int index) public view returns (string memory) {
-    require(index >= 0 && index < counter, "Invalid index");
-    return pokmeons[index];
+
+  function mintAux(address receiver, address pokemonAdress) public returns(bool) {
+    for (int i=0; i<cardCount; i++){
+      // pokemon trouver.
+      if (address(pokmeons[i]) == pokemonAdress) {
+        // est ce qu'il est libre ?
+        if (!pokmeons[i].hasOwner()) { // si oui, on mint.
+          pokmeons[i].setOwner(receiver);
+        }
+      }
+    }
   }
 
-  function getCode() public view returns (string memory) {
-    return code;
+
+  /** Returns the number of nft owned by a user in the collection.
+   */
+  function balanceOf(address owner) public   returns (uint256) {
+    uint256 balance = 0;
+    for (int i = 0; i < cardCount; i++){
+      if (pokmeons[i].owner() == owner) {
+        balance++;
+      }
+    }
+    return balance;
   }
+
+  /**
+      returns all cards of user 
+   */
+   function allCardsUser(address owner) public view returns  (string [] memory){
+      string [] memory allcards;
+      for (int i = 0; i<cardCount ; i++){
+        if(pokmeons[i].owner()==owner){
+         // allcards.push(pokmeons[i].getId());
+        }
+      }
+      return allcards;
+   }
+
+     function ownerOf(address _tokenId)  public view virtual  returns  (address) {
+      
+     }
+
 }
