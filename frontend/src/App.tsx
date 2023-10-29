@@ -83,6 +83,23 @@ export const App = () => {
     wallet?.contract.allCollections().then(console.log).catch(console.error)
   }
 
+  const collectionCardCount = collectionId => {
+    console.log('Get collection 0 card count')
+    wallet?.contract.cardCount(collectionId).then(result => {
+      let res = result
+      if (result._isBigNumber) {
+        res = result.toNumber()
+      }
+      console.log('collection ' + collectionId + ' card count : ' + res)
+    })
+  }
+
+  const allCollectionCardCount = () => {
+    for (let i = 0; i < 4; i++) {
+      collectionCardCount(i)
+    }
+  }
+
   const TransferCard = () => {
     console.log('Transfer card')
     //Mint first
@@ -110,6 +127,9 @@ export const App = () => {
         </button>
         <button type="button" onClick={getAllCollections}>
           collections{' '}
+        </button>
+        <button type="button" onClick={allCollectionCardCount}>
+          cardcount{' '}
         </button>
       </div>
     </div>

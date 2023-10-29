@@ -1,0 +1,1 @@
+[{"inputs":[],"name":"id","outputs":[{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"img_url","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]

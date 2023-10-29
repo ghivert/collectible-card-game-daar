@@ -30,22 +30,27 @@ const deployer: DeployFunction = async hre => {
    */
   setTimeout(async () => {
     //ajout des pokemons dans la blockchain
-    console.log("insertion des cartes");
-    getPokemonFromApi().forEach(async pokemon => {
+    const pokemons = getPokemonFromApi();
+    let insertion = 0
+    pokemons.forEach(async pokemon => {
       if (collections.includes(pokemon.set)) {
-       const position = collections.indexOf(pokemon.set);
-       await  main.add_carte_to_collection(position,pokemon.id)
+        const position = collections.indexOf(pokemon.set);
+        console.log(`ajout de ${pokemon.id} dans la collection ${pokemon.set}`);
+        
+        insertion++;
+        await  main.addCardToCollection(position, pokemon.id)
       }
     })
+    console.log(`insertion de ${insertion} cartes`);
   }, 5000);
   
 /**
  * Affichage des pokemon de la collection 3
- */
-  setTimeout( () => {
-      console.log("affichage cartes de la collection 3");
-       main.allPokemonsOfCollection(3).then(console.log)
-  }, 7000);
+setTimeout( () => {
+  console.log("affichage cartes de la collection 3");
+  main.allPokemonsOfCollection(3).then(console.log)
+}, 7000);
+*/
 
   /**
    * Mint card to user 
@@ -59,13 +64,12 @@ const deployer: DeployFunction = async hre => {
     main.mint(main.address,contractAddress ).then(()=>{
            /**
             * Afichage des cartes d'un user 
-            */
-          main.allCardsUser(main.address).then(console.log)
+           console.log("affichage des cartes d'un user");
+           main.allCardsUser(main.address).then(console.log)
+           */
 
          })
     }, 10000);
-
-
 }
 
 
