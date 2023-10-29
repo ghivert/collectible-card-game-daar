@@ -29,11 +29,17 @@ contract Collection {
     address receiver,
     address pokemonAdress
   ) public returns (bool) {
+    console.log("goal: ");
+    console.log(pokemonAdress);
     for (int i = 0; i < cardCount; i++) {
+      console.log("pokemonAdress");
+      console.log(address(pokmeons[i]));
       // pokemon trouver.
       if (address(pokmeons[i]) == pokemonAdress) {
+        console.log("pokemon trouver");
         // est ce qu'il est libre ?
         if (!pokmeons[i].hasOwner()) {
+          console.log("pokemon libre");
           // si oui, on mint.
           pokmeons[i].setOwner(receiver);
         }
@@ -47,8 +53,16 @@ contract Collection {
     int balance = 0;
     for (int i = 0; i < cardCount; i++) {
       // log:  owner vs pokemon owner
-      if (pokmeons[i].owner() == owner) {
-        balance++;
+      console.log("[card balance]");
+      console.log(owner);
+      console.log(pokmeons[i].owner());
+      pokmeons[i].hasOwner();
+      if (pokmeons[i].hasOwner()) {
+        bool userOwnedPokemon = pokmeons[i].owner() == owner;
+        if (userOwnedPokemon) {
+          console.log("[one pokemon found]");
+          balance++;
+        }
       }
     }
     return balance;

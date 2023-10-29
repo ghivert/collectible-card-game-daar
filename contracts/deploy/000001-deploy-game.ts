@@ -44,32 +44,40 @@ const deployer: DeployFunction = async hre => {
     console.log(`insertion de ${insertion} cartes`);
   }, 5000);
   
-/**
- * Affichage des pokemon de la collection 3
-setTimeout( () => {
-  console.log("affichage cartes de la collection 3");
-  main.allPokemonsOfCollection(3).then(console.log)
-}, 7000);
-*/
+  /**
+   * Affichage des pokemon de la collection 3
+  */
+  setTimeout( () => {
+    console.log("affichage cartes de la collection 3");
+    main.allPokemonsOfCollection(3).then(console.log)
+  }, 7000);
 
   /**
    * Mint card to user 
    */
   setTimeout(async () => {
     console.log(" creation de pokemon NFT");
+    const userAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+    // retrive the user address
     const my_new_pokemon = await main.createPokemon2("cart1");
+    console.log("adresse du pokemon: " + my_new_pokemon);
+    
     const transactionHash = my_new_pokemon.hash;
     const transactionReceipt = await hre.ethers.provider.getTransactionReceipt(transactionHash);
-    const contractAddress = transactionReceipt.logs[0].address;
-    main.mint(main.address,contractAddress ).then(()=>{
-           /**
-            * Afichage des cartes d'un user 
-           console.log("affichage des cartes d'un user");
-           main.allCardsUser(main.address).then(console.log)
-           */
+    const nftAddress = transactionReceipt.logs[0].address;
+    main.mint(userAddress, nftAddress).then(()=>{
+      // Afichage du nombre de cartes de l'utilisateur
+      console.log("nombre de cartes de l'utilisateur");
+      main.balanceOf(userAddress).then(result => {
+        let count = result;
+        if (result instanceof ethers.BigNumber) {
+          count = result.toNumber();
+        }
+        console.log(count);
+      });
 
-         })
-    }, 10000);
+    })
+  }, 10000);
 }
 
 

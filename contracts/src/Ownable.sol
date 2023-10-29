@@ -15,7 +15,7 @@ contract Ownable {
    * account.
    */
   constructor() {
-    _owner = msg.sender;
+    _owner = address(0);
     emit OwnershipTransferred(address(0), _owner);
   }
 
@@ -33,7 +33,7 @@ contract Ownable {
 
   /** Cehck if the nft has an owner or not
    */
-  function hasOwner() public view returns (bool){
+  function hasOwner() public view returns (bool) {
     return _owner != address(0);
   }
 
