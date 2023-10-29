@@ -30,26 +30,16 @@ contract Main is PokemonOwenership {
   /**
     Create Pokemon NFT then return only its address
   */
-  function createPokemon(string memory url_) external  returns(address){
-    Pokemon p = new Pokemon(url_);
-    address a = address(p);
-    return a;
-  }
-
-  /**
-    Create Pokemon NFT then return only its address
-  */
-  function createPokemon2(string memory url_) external  returns(address){
-    Pokemon p = new Pokemon(url_);
-    address a = address(p);
-    return a;
+  function createPokemon2(string memory url_) public  returns(Pokemon){
+    Pokemon p = new  Pokemon(url_);
+    return p;
   }
 
   /**
     Add a carte to a collection 
    */
-  function add_carte_to_collection(int collection_id, string memory url_carte) public {
-   // pokemonCollections[collection_id].addCarte(url_carte);
+  function add_carte_to_collection(int collection_id, string memory pokemonId) public {
+     pokemonCollections[collection_id].addCarte(pokemonId);
   }
 
   /**
@@ -64,23 +54,15 @@ contract Main is PokemonOwenership {
       codes[counter] = pokemonCollections[i].code();
       counter++;
     }
-    return codes; //names des collections
+    return codes; 
   }
 
   /**
     Get ALL Pokemon of collection  
   */
-  function allPokemonsOfCollection(
-    int collectionId
-  ) public view returns (string[] memory) {
+  function allPokemonsOfCollection(int collectionId) public view returns (string[] memory) {
     Collection collection = pokemonCollections[collectionId];
-    string[] memory result = new string[](uint256(collection.counter()));
-    uint256 index = 0;
-    for (int i = 0; i < collection.counter(); i++) {
-      //result[index] = collection.getPokemonById(i);
-      index++;
-    }
-    return result;
+    return collection.allPoekmons();
   }
 
 

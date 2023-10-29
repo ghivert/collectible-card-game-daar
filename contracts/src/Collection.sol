@@ -20,8 +20,9 @@ contract Collection {
     code = _code;
   }
 
-  function addCarte( Pokemon url) public {
-    pokmeons[counter] = url;
+  function addCarte(string memory url) public {
+    Pokemon p = new Pokemon(url);
+    pokmeons[counter]= p;
     counter++;
   }
 
@@ -42,7 +43,7 @@ contract Collection {
   /** Returns the number of nft owned by a user in the collection.
    */
   function balanceOf(address owner) public view returns (int) {
-    int  balance = 3;
+    int  balance = 0;
     for (int i = 0; i < cardCount; i++){
       if (pokmeons[i].owner() == owner) {
         balance++;
@@ -50,8 +51,6 @@ contract Collection {
     }
     return balance;
   }
-
- 
 
   /**
       returns all cards of user 
@@ -66,8 +65,17 @@ contract Collection {
       return allcards;
    }
 
-     function ownerOf(address _tokenId)  public view virtual  returns  (address) {
-      
-     }
+  function ownerOf(address _tokenId)  public view virtual  returns  (address) {     
+  }
+
+ function allPoekmons() public view virtual returns (string [] memory){
+      string[] memory result = new string[](uint256(counter));
+      uint256 index =0;
+      for (int i = 0; i<counter; i++){
+        result[index]= pokmeons[i].getId();
+        index++;
+      }
+      return result;
+ }
 
 }

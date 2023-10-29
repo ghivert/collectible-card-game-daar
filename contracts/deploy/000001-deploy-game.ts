@@ -3,6 +3,9 @@ import { DeployFunction } from 'hardhat-deploy/types'
 import { getAllCards, getAllCollections } from '../services/pokemon.service'
 import { ethers } from 'ethers'
 
+/**
+ * creation des collections 
+ */
 const deployer: DeployFunction = async hre => {
   if (hre.network.config.chainId !== 31337) return
   const { deployer } = await hre.getNamedAccounts()
@@ -12,37 +15,50 @@ const deployer: DeployFunction = async hre => {
       main.createCollection2(collection.name, collection.code);
   })
 
+/**
+ * aFIICHAGE DES COLLECTIONS
+ */
   let collections : any[];
   setTimeout(async () => {
     console.log("debut collecttion");
     collections = await main.allCollections();
-    console.log("fin collecttion");
     console.log(collections);
   }, 3000);
-  setTimeout(() => {
+
+  /**
+   * Rajout des pokemons from api to collections
+   */
+  setTimeout(async () => {
     //ajout des pokemons dans la blockchain
     console.log("insertion des cartes");
-    getPokemonFromApi().forEach(pokemon => {
+    getPokemonFromApi().forEach(async pokemon => {
       if (collections.includes(pokemon.set)) {
-        const position = collections.indexOf(pokemon.set);
-        main.add_carte_to_collection(position, pokemon.id)
+       const position = collections.indexOf(pokemon.set);
+       await  main.add_carte_to_collection(position,pokemon.id)
       }
     })
   }, 5000);
   
-
-  setTimeout(() => {
+/**
+ * Affichage des pokemon de la collection 3
+ */
+  setTimeout( () => {
       console.log("affichage cartes de la collection 3");
-      main.allPokemonsOfCollection(3).then(console.log)
+       main.allPokemonsOfCollection(3).then(console.log)
   }, 7000);
 
+  /**
+   * Mint card to user 
+   */
   setTimeout(async () => {
     console.log(" creation de pokemon NFT");
-    main.createPokemon2("cart1").then(()=>{
-      main.allCollections().then(console.log)
-    })
-  
-     main.mint(main.address, "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266" ).then(()=>{
+    const my_new_pokemon = await main.createPokemon2("cart1");
+    const transactionHash = my_new_pokemon.hash;
+    const transactionReceipt = await hre.ethers.provider.getTransactionReceipt(transactionHash);
+    const contractAddress = transactionReceipt.logs[0].address;
+    
+    console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);    
+     main.mint(main.address,contractAddress ).then(()=>{
          main.balanceOf(main.address).then(console.log)
      })
     
