@@ -10,7 +10,7 @@ contract PokemonOwenership is  Ownable, ERC721
   mapping(int => Collection) public pokemonCollections;
   int public collectionCount;
 
-  constructor() {
+  constructor(){
   }
 
   /*
@@ -72,17 +72,7 @@ contract PokemonOwenership is  Ownable, ERC721
    */
   function approve( address _approved,uint256 _tokenId ) public  override payable{}
 
-  /**
-  Returns all cards of user 
-  */
 
-  function allCardsUser(address owner) public view returns  (string [] memory){
-    string [] memory allcards;
-    for (int i = 0; i<collectionCount; i++){
-     //  allcards.push(pokemonCollections[i].allCardsUser(owner));
-    }
-    return allcards;
-  } 
 
   
    

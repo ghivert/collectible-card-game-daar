@@ -55,11 +55,13 @@ contract Collection {
   /**
       returns all cards of user 
    */
-   function allCardsUser(address owner) public view returns  (string [] memory){
+   function allCardsUser(address owner) public view virtual returns  (string [] memory){
       string [] memory allcards;
+      uint256 index =0;
       for (int i = 0; i<cardCount ; i++){
         if(pokmeons[i].owner()==owner){
-         // allcards.push(pokmeons[i].getId());
+           allcards[index]=(pokmeons[i].getId());
+           index++;
         }
       }
       return allcards;

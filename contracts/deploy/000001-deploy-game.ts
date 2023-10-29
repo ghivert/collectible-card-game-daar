@@ -56,15 +56,20 @@ const deployer: DeployFunction = async hre => {
     const transactionHash = my_new_pokemon.hash;
     const transactionReceipt = await hre.ethers.provider.getTransactionReceipt(transactionHash);
     const contractAddress = transactionReceipt.logs[0].address;
-    
-    console.log("Adresse du nouveau contrat Pokemon : "+contractAddress);    
-     main.mint(main.address,contractAddress ).then(()=>{
-         main.balanceOf(main.address).then(console.log)
-     })
-    
-    console.log("balance  après le mint");
-}, 10000);
+    main.mint(main.address,contractAddress ).then(()=>{
+           /**
+            * Afichage des cartes d'un user 
+            */
+          main.allCardsUser(main.address).then(console.log)
+
+         })
+    }, 10000);
+
+
 }
+
+
+
 
 const getCollectionFromApi = () => {
   return getAllCollections()

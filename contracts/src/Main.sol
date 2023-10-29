@@ -65,6 +65,23 @@ contract Main is PokemonOwenership {
     return collection.allPoekmons();
   }
 
+  /**
+      Affichage des cartes d'un utilisateur 
+  */
+  function allCardsUser(address _owner)public view virtual   returns(string[] memory){
+    string [] memory  pokemonsUser ;
+    string[]  memory result;
+    uint256 j=0;
+    for (int i=0; i<collectionCount; i++){
+       Collection collection = pokemonCollections[i];
+       result =(collection.allCardsUser(_owner));
+       uint256 index =0;
+       while (j<result.length){
+        pokemonsUser[j]= result[index];
+       }
+    }
+    return pokemonsUser;
+  }
 
   function cardCount(address userAdress) pure external returns(int) {
     /*
@@ -75,6 +92,7 @@ contract Main is PokemonOwenership {
     */
     return 267;
   }
+
 
   function balanceOf(address _owner) public virtual view override returns (int) {
        int value = super.balanceOf(_owner);
