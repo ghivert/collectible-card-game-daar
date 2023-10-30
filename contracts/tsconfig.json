@@ -23,6 +23,6 @@
       "$/*": ["../typechain/src/*"]
     }
   },
-  "include": ["./test", "./src", "./lib", "./hardhat.config.ts", "./deploy", "services"],
+  "include": ["./test", "./src", "./lib", "./hardhat.config.ts", "./deploy", "services", "../frontend/src/services/pokemonapi", "../frontend/src/services/blockchaine"],
   "files": ["./hardhat.config.ts"]
 }
