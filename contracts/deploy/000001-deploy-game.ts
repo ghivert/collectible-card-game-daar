@@ -31,7 +31,6 @@ const deployer: DeployFunction = async hre => {
       if (collections.includes(pokemon.set)) {
         const position = collections.indexOf(pokemon.set);
         insertion++;
-        console.log("je uis la ")
         await  main.addCardToCollection(position, pokemon.id)
       }
     })

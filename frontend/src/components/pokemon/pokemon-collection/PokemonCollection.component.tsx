@@ -34,12 +34,7 @@ const PokemonCollection = props => {
 
 const PokemonCollectionsPresenter = props => {
   const [collectionsMetadata, setCollectionsMetadata] = useState([])
-  const [collections, setCollections] = useState([])
   const wallet = props.wallet
-
-  const appendCollectionData = newCollectionData => {
-    setCollections([...collectionsMetadata, collectionsMetadata])
-  }
 
   useEffect(() => {
     getAllCollectionsMetadata().then(allCollection => {
@@ -69,19 +64,44 @@ const PokemonCollectionsPresenter = props => {
 
 const PokemonCollectionPresenter = props => {
   const [cards, setCards] = useState([])
+  const [simpleCards, setSimpleCards] = useState([]) //["id1", "id2", "id3
   const { id } = useParams()
+  const wallet = props.wallet
+
+  const getCards = async () => {
+    //  modofier la fonction allPokemonsOfCollection ==> change int with sting :)
+    await wallet?.contract.allPokemonsOfCollection(3).then(data => {
+      setSimpleCards(data)
+      console.log(data)
+    })
+  }
 
   useEffect(() => {
     getCollectionById(id).then(data => {
       setCards(data)
     })
+    getCards()
   }, [id])
 
   console.log(cards)
 
-  return (
+  /*return (
     <div className="pokemon-collection-presenter">
       <PokemonList cards={cards} />
+    </div>
+  )*/
+
+  return (
+    <div className="pokemon-collection-presenter">
+      <h3>display simple cards</h3>
+      <div>
+        {simpleCards.map((pokemon, index) => (
+          <div key={index}>
+            <h3>Single pokemon</h3>
+            <p>{pokemon}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

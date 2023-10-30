@@ -80,7 +80,7 @@ export const App = () => {
           <Route path="/pokemon/:id" element={<PokemonDetails />} />
           <Route
             path="/collection/:id"
-            element={<PokemonCollectionPresenter />}
+            element={<PokemonCollectionPresenter wallet={wallet} />}
           />
         </Route>
       </Routes>

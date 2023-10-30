@@ -19,10 +19,6 @@ const PokemonCard = (props: any) => {
 const PokemonList = props => {
   const listeDeCartes = props.cards ?? []
   const cartes = Object.values(listeDeCartes)
-  const wallet = props.wallet
-  // useEffect(() => {
-  //   wallet?.contract.allPokemonsOfCollection("")
-  // })
 
   return (
     <div className="pokemon-list-container">

@@ -39,10 +39,7 @@ const getAllCollectionsMetadata = async () => {
 
 const getCollectionById = async (id: string) => {
     console.log("getCollectionById: ", id);
-    
     const res = data.cards.filter((pokemon: any) => pokemon.setCode === id );    
-    console.log("res ", res);
-    
     return res;
 }
 
