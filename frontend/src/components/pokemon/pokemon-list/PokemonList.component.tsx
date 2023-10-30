@@ -19,6 +19,7 @@ const PokemonCard = (props: any) => {
 const PokemonList = props => {
   const listeDeCartes = props.cards ?? []
   const cartes = Object.values(listeDeCartes)
+  const wallet = props.wallet
 
   return (
     <div className="pokemon-list-container">
