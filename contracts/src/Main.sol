@@ -29,6 +29,22 @@ contract Main is PokemonOwenership {
     return collection;
   }
 
+  /** Retrieve the adderss of all pokemons
+   */
+  function allPokemonsFrom(
+    int collectionId
+  ) public view returns (address[] memory) {
+    return pokemonCollections[collectionId].getPokemons();
+  }
+
+  function computeAllCardCount() private returns (uint256) {
+    uint256 count = 0;
+    for (int i = 0; i < collectionCount; i++) {
+      count = count + pokemonCollections[i].pokemonCount();
+    }
+    return count;
+  }
+
   /**
     Create Pokemon NFT then return only its address
   */

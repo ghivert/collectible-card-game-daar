@@ -18,10 +18,6 @@ contract PokemonOwenership is Ownable, ERC721 {
    */
   function mint(address receiver, address pokemonAdress) public {
     for (int i = 0; i < collectionCount; i++) {
-      // on delegue a la collection le mint
-      // si c'est fait dans une collection,
-      // inutile de continuer dans les suivantes
-      // d'ou le break
       if (pokemonCollections[i].mintAux(receiver, pokemonAdress)) {
         break;
       }
@@ -48,7 +44,10 @@ contract PokemonOwenership is Ownable, ERC721 {
     address _tokenId
   ) public view virtual override returns (address) {
     for (int i = 0; i < collectionCount; i++) {
-      return pokemonCollections[i].ownerOf(_tokenId);
+      address owner = pokemonCollections[i].ownerOf(_tokenId);
+      if (owner != address(0)) {
+        return owner;
+      }
     }
     return address(0);
   }

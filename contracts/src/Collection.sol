@@ -11,7 +11,7 @@ contract Collection {
   string public name;
   string public code;
   int public cardCount; //taile de la colection
-  mapping(int => Pokemon) public pokmeons;
+  mapping(int => Pokemon) public pokemons;
 
   constructor(string memory _name, int _cardCount, string memory _code) {
     name = _name;
@@ -20,9 +20,23 @@ contract Collection {
   }
 
   function addCard(string memory url) public {
-    Pokemon p = new Pokemon(url);
-    pokmeons[cardCount] = p;
+    Pokemon p = new Pokemon(url); ///
+    pokemons[cardCount] = p;
     cardCount++;
+  }
+
+  function pokemonCount() public returns (uint256) {
+    return uint256(cardCount);
+  }
+
+  function getPokemons() public view returns (address[] memory) {
+    address[] memory pokemonsResult = new address[](uint256(cardCount));
+    uint256 iUint = 0;
+    for (int i = 0; i < (cardCount); i++) {
+      pokemonsResult[iUint] = address(pokemons[i]);
+      iUint++;
+    }
+    return pokemonsResult;
   }
 
   function mintAux(
@@ -33,15 +47,15 @@ contract Collection {
     console.log(pokemonAdress);
     for (int i = 0; i < cardCount; i++) {
       console.log("pokemonAdress");
-      console.log(address(pokmeons[i]));
+      console.log(address(pokemons[i]));
       // pokemon trouver.
-      if (address(pokmeons[i]) == pokemonAdress) {
+      if (address(pokemons[i]) == pokemonAdress) {
         console.log("pokemon trouver");
         // est ce qu'il est libre ?
-        if (!pokmeons[i].hasOwner()) {
+        if (!pokemons[i].hasOwner()) {
           console.log("pokemon libre");
           // si oui, on mint.
-          pokmeons[i].setOwner(receiver);
+          pokemons[i].setOwner(receiver);
         }
       }
     }
@@ -55,10 +69,10 @@ contract Collection {
       // log:  owner vs pokemon owner
       console.log("[card balance]");
       console.log(owner);
-      console.log(pokmeons[i].owner());
-      pokmeons[i].hasOwner();
-      if (pokmeons[i].hasOwner()) {
-        bool userOwnedPokemon = pokmeons[i].owner() == owner;
+      console.log(pokemons[i].owner());
+      pokemons[i].hasOwner();
+      if (pokemons[i].hasOwner()) {
+        bool userOwnedPokemon = pokemons[i].owner() == owner;
         if (userOwnedPokemon) {
           console.log("[one pokemon found]");
           balance++;
@@ -77,21 +91,28 @@ contract Collection {
     string[] memory allcards;
     uint256 index = 0;
     for (int i = 0; i < cardCount; i++) {
-      if (pokmeons[i].owner() == owner) {
-        allcards[index] = (pokmeons[i].getId());
+      if (pokemons[i].owner() == owner) {
+        allcards[index] = (pokemons[i].getId());
         index++;
       }
     }
     return allcards;
   }
 
-  function ownerOf(address _tokenId) public view virtual returns (address) {}
+  function ownerOf(address _tokenId) public view virtual returns (address) {
+    for (int i = 0; i < cardCount; i++) {
+      if (address(pokemons[i]) == _tokenId) {
+        return pokemons[i].owner();
+      }
+    }
+    return address(0);
+  }
 
   function allPoekmons() public view virtual returns (string[] memory) {
     string[] memory result = new string[](uint256(cardCount));
     uint256 index = 0;
     for (int i = 0; i < cardCount; i++) {
-      result[index] = pokmeons[i].getId();
+      result[index] = pokemons[i].getId();
       index++;
     }
     return result;
