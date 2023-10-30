@@ -14,7 +14,7 @@ const deployer: DeployFunction = async hre => {
   getCollectionFromApi().forEach(collection => {
       main.createCollection2(collection.name, collection.code);
   })
-
+   
 /**
  * aFIICHAGE DES COLLECTIONS
  */
@@ -51,7 +51,7 @@ const deployer: DeployFunction = async hre => {
     console.log(collections.length)
     for (let i = 0; i < collections.length; i++) {
       const pokemons = await main.allPokemonsFrom(i);
-      console.log(pokemons)
+      //console.log(pokemons)
       allPokemons = allPokemons.concat(pokemons);
     }
   
@@ -67,8 +67,8 @@ const deployer: DeployFunction = async hre => {
 
 const getCollectionFromApi = () => {
   return getAllCollections()
-}
-
+}   
+   
 const getPokemonFromApi = () =>{
   return getAllCards()
 }

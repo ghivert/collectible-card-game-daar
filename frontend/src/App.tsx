@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import Home from './components/home/Home.component'
 import Layout from './pages/Layout'
@@ -69,7 +70,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
+      <Routes>   
         <Route path="/" element={<Layout />}>
           <Route index element={<Home wallet={wallet} />} />
           <Route path="me" element={<User wallet={wallet} />} />

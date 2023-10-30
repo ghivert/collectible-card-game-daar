@@ -94,10 +94,9 @@ const PokemonCollectionPresenter = props => {
   return (
     <div className="pokemon-collection-presenter">
       <h3>display simple cards</h3>
-      <div>
+      <div className="pokemon-card-details">
         {simpleCards.map((pokemon, index) => (
           <div key={index}>
-            <h3>Single pokemon</h3>
             <p>{pokemon}</p>
           </div>
         ))}
