@@ -57,7 +57,7 @@ contract Collection {
   function allCardsUser(
     address owner
   ) public view virtual returns (string[] memory) {
-    string[] memory allcards;
+    string[] memory allcards = new string[](uint256(cardCount));
     uint256 index = 0;
     for (int i = 0; i < cardCount; i++) {
       if (pokemons[i].owner() == owner) {
@@ -91,8 +91,6 @@ contract Collection {
     address adressPokemon
   ) public view returns (string memory) {
     for (int i = 0; i < cardCount; i++) {
-      //console.log("pokemon id : %s", address(pokemons[i]));
-      //console.log("pokemon id : %s", pokemons[i]).getId();
       if (adressPokemon == address(pokemons[i])) {
         return pokemons[i].getId();
       }

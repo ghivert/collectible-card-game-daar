@@ -124,6 +124,10 @@ export const App = () => {
       .catch(console.error)
   }
 
+  const allCadsUser = async () => {
+    wallet?.contract.allCardsUser(wallet?.details.account).then(console.log)
+  }
+
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
@@ -143,6 +147,9 @@ export const App = () => {
         </button>
         <button type="button" onClick={getPokemonData}>
           another pokemon id{' '}
+        </button>
+        <button type="button" onClick={allCadsUser}>
+          all pokemon of conected user id{' '}
         </button>
       </div>
     </div>

@@ -45,9 +45,9 @@ const deployer: DeployFunction = async hre => {
     console.log(" creation de pokemon NFT");
     // retrive the user address
     const userAddress = "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65";
-    
+       
     // retrive all pokemons
-    let allPokemons : any[] = [];
+    let allPokemons : any[] = [];  
     console.log(collections)
     console.log(collections.length)
     for (let i = 0; i < collections.length; i++) {
