@@ -37,14 +37,6 @@ contract Main is PokemonOwenership {
     return pokemonCollections[collectionId].getPokemons();
   }
 
-  function computeAllCardCount() private returns (uint256) {
-    uint256 count = 0;
-    for (int i = 0; i < collectionCount; i++) {
-      count = count + pokemonCollections[i].pokemonCount();
-    }
-    return count;
-  }
-
   /**
     Create Pokemon NFT then return only its address
   */
@@ -92,6 +84,24 @@ contract Main is PokemonOwenership {
   }
 
   /**
+      Id of pokemon a partir de son adress 
+  */
+  function pokemonFromadress(
+    address adressPokemon
+  ) public view returns (string memory) {
+    for (int i = 0; i < collectionCount; i++) {
+      Collection collection = pokemonCollections[i];
+      string memory chechpokemon = collection.pokemonFromadress(adressPokemon);
+      bool isIsNotEmpty = keccak256(abi.encodePacked(chechpokemon)) !=
+        keccak256(abi.encodePacked(""));
+      if (isIsNotEmpty) {
+        return chechpokemon;
+      }
+    }
+    return "";
+  }
+
+  /**
       Affichage des cartes d'un utilisateur 
   */
   function allCardsUser(
@@ -109,10 +119,5 @@ contract Main is PokemonOwenership {
       }
     }
     return pokemonsUser;
-  }
-
-  modifier onlySuperAdmin() {
-    require(msg.sender == admin, "Only Super Admin can call this function");
-    _;
   }
 }

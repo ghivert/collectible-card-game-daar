@@ -23,19 +23,6 @@ contract PokemonOwenership is Ownable, ERC721 {
     }
   }
 
-  /*
-    Returns the number of tokens in owner's account.
-  */
-  function balanceOf(
-    address _ownerOf
-  ) public view virtual override returns (int) {
-    int count = 0;
-    for (int i = 0; i < collectionCount; i++) {
-      count = pokemonCollections[i].balanceOf(_ownerOf) + count;
-    }
-    return count;
-  }
-
   /**
   Returns the owner of the tokenId token.
   */

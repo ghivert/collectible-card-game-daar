@@ -2,6 +2,7 @@
 //pragma solidity  >=0.5.0 <0.6.0;
 pragma solidity ^0.8.19;
 
+import "hardhat/console.sol";
 import "./Ownable.sol";
 import "./ERC721.sol";
 import "./Pokemon.sol";
@@ -19,13 +20,9 @@ contract Collection {
   }
 
   function addCard(string memory url) public {
-    Pokemon p = new Pokemon(url); ///
+    Pokemon p = new Pokemon(url);
     pokemons[cardCount] = p;
     cardCount++;
-  }
-
-  function pokemonCount() public returns (uint256) {
-    return uint256(cardCount);
   }
 
   function getPokemons() public view returns (address[] memory) {
@@ -52,22 +49,6 @@ contract Collection {
         }
       }
     }
-  }
-
-  /** Returns the number of nft owned by a user in the collection.
-   */
-  function balanceOf(address owner) public view returns (int) {
-    int balance = 0;
-    for (int i = 0; i < cardCount; i++) {
-      pokemons[i].hasOwner();
-      if (pokemons[i].hasOwner()) {
-        bool userOwnedPokemon = pokemons[i].owner() == owner;
-        if (userOwnedPokemon) {
-          balance++;
-        }
-      }
-    }
-    return balance;
   }
 
   /**
@@ -104,5 +85,18 @@ contract Collection {
       index++;
     }
     return result;
+  }
+
+  function pokemonFromadress(
+    address adressPokemon
+  ) public view returns (string memory) {
+    for (int i = 0; i < cardCount; i++) {
+      //console.log("pokemon id : %s", address(pokemons[i]));
+      //console.log("pokemon id : %s", pokemons[i]).getId();
+      if (adressPokemon == address(pokemons[i])) {
+        return pokemons[i].getId();
+      }
+    }
+    return "";
   }
 }

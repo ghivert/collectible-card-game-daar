@@ -109,6 +109,21 @@ export const App = () => {
       })
   }
 
+  const getPokemonData = async () => {
+    const pokemonsAdress = await allPokemons()
+    if (!pokemonsAdress) return
+    if (pokemonsAdress.length === 0) return
+    const pokemonaddress: string = pokemonsAdress[0]
+    console.log(pokemonaddress)
+
+    wallet?.contract
+      .pokemonFromadress(pokemonaddress)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(console.error)
+  }
+
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
@@ -122,6 +137,12 @@ export const App = () => {
         </button>
         <button type="button" onClick={getAllCollections}>
           collections{' '}
+        </button>
+        <button type="button" onClick={getPokemonData}>
+          pokemon id{' '}
+        </button>
+        <button type="button" onClick={getPokemonData}>
+          another pokemon id{' '}
         </button>
       </div>
     </div>
