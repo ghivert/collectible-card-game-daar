@@ -22,7 +22,7 @@ const config: HardhatUserConfig = {
     sources: './src',
   },
   namedAccounts: {
-    deployer: { default: 0 },
+    deployer: { default: 1 },
     admin: { default: 0 },
     second: { default: 1 },
     random: { default: 8 },

@@ -5,7 +5,7 @@ import type { Main } from '$/Main'
 export type { Main } from '$/Main'
 
 export const correctChain = () => {
-  return 31337
+  return 1337
 }
 
 export const init = async (details: ethereum.Details) => {
