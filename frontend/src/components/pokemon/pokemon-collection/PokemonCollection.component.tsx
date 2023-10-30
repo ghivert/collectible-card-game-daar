@@ -81,7 +81,7 @@ const PokemonCollectionPresenter = props => {
 
   return (
     <div className="pokemon-collection-presenter">
-      <PokemonList cards={wallet} />
+      <PokemonList cards={cards} />
     </div>
   )
 }
