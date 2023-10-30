@@ -46,20 +46,11 @@ export const App = () => {
   const [info, setInfo] = useState<string>("connecting")
   const [contractAddress, setContractAddress] = useState<string>("")
 
-  // async function onClick1() {
-  //   console.log("1")
-  //   var newBalance: BigNumber = await wallet?.contract.seeBalance()
-  //   console.log(newBalance)
-  //   setInfo(newBalance.toString())
-  // }
-
-  // async function onClick2() {
-  //   const details_ = await ethereum.connect('metamask')
-
-  //   if (details_?.account != undefined) {
-  //     setInfo(details_.account)
-  //   }
-  // }
+  async function depositEth() {
+    wallet?.contract.Deposit({ value: utils.parseEther("1") }).then((trx) => {
+      console.log(trx)
+    })
+  }
 
   useAffect(() => {
     setInfo(String(wallet?.details.account))
@@ -74,8 +65,7 @@ export const App = () => {
   return (
     <div className={styles.body}>
       
-      {/* <button onClick={onClick1}>Click to get balance: {balance}</button>
-      <button onClick={onClick2}>Dont clock</button> */}
+      <button onClick={depositEth}>Deposit 1 ETH</button>
       <p>Account {info}</p>
       <p>Contract {contractAddress}</p>
       <p>Balance on the contract {balance} ETH</p>
