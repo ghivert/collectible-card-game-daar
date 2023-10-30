@@ -1,0 +1,23 @@
+.pokemon-card-details {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.pokemon-card-details-img {
+}
+
+.pokemon-card-details-desc {
+    border: 1px dashed black;
+}
+
+.pokemon-card-details > * {
+    width: 300px;
+    height: 500px;
+    margin: 10px;
+}

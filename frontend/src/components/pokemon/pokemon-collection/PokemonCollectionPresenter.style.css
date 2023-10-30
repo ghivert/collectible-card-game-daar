@@ -1,0 +1,19 @@
+h2 {
+    text-align: center;
+}
+
+.pokemon-collections-presenter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pokemon-collection {
+    border: 1px solid black;
+    margin: 5px;
+    width: 200px;
+    text-align: center;
+}
+.pokemon-collection img {
+    width: 100%;
+}
