@@ -70,12 +70,19 @@ export const App = () => {
 
   const wallet = useWallet()
 
-  const AddCarteToUser = () => {
-    console.log('mint card')
-    wallet?.contract.mint_(wallet?.details.account, 'carte1').then(() => {
-      wallet?.contract.owner_of_('carte1').then(console.log)
-      wallet?.contract.balanceOf_(wallet?.details.account).then(console.log)
-    })
+  const mintPokemon = async () => {
+    const pokemonsAdress = await allPokemons()
+    console.log(pokemonsAdress)
+    console.log('user: ' + wallet?.details.account)
+
+    await wallet?.contract.mint(wallet?.details.account, pokemonsAdress[0])
+    wallet?.contract
+      .ownerOf(pokemonsAdress[0])
+      .then(data => {
+        console.log('owner is: ')
+        console.log(data)
+      })
+      .catch(console.error)
   }
 
   const getAllCollections = () => {
@@ -83,21 +90,9 @@ export const App = () => {
     wallet?.contract.allCollections().then(console.log).catch(console.error)
   }
 
-  const collectionCardCount = collectionId => {
-    console.log('Get collection 0 card count')
-    wallet?.contract.cardCount(collectionId).then(result => {
-      let res = result
-      if (result._isBigNumber) {
-        res = result.toNumber()
-      }
-      console.log('collection ' + collectionId + ' card count : ' + res)
-    })
-  }
-
-  const allCollectionCardCount = () => {
-    for (let i = 0; i < 4; i++) {
-      collectionCardCount(i)
-    }
+  const allPokemons = async () => {
+    //getAllCollections()
+    return await wallet?.contract.allPokemonsFrom(3)
   }
 
   const TransferCard = () => {
@@ -110,7 +105,7 @@ export const App = () => {
         'carte1'
       )
       .then(() => {
-        wallet?.contract.owner_of_('carte1').then(console.log)
+        wallet?.contract.ownerOf('carte1').then(console.log)
       })
   }
 
@@ -119,7 +114,7 @@ export const App = () => {
       <h1>Welcome to Pokémon TCG</h1>
       <div>
         <PokemonList cartes={pokemonData?.cards} />
-        <button type="button" onClick={AddCarteToUser}>
+        <button type="button" onClick={mintPokemon}>
           Mint card to user{' '}
         </button>
         <button type="button" onClick={TransferCard}>
@@ -127,9 +122,6 @@ export const App = () => {
         </button>
         <button type="button" onClick={getAllCollections}>
           collections{' '}
-        </button>
-        <button type="button" onClick={allCollectionCardCount}>
-          cardcount{' '}
         </button>
       </div>
     </div>

@@ -111,24 +111,6 @@ contract Main is PokemonOwenership {
     return pokemonsUser;
   }
 
-  function balanceOf(
-    address _owner
-  ) public view virtual override returns (int) {
-    int value = super.balanceOf(_owner);
-    return value;
-  }
-
-  /** Return the number of cards in a giving collection.
-   */
-  function cardCount(int collectionId) public view returns (int) {
-    Collection collection = pokemonCollections[collectionId];
-    return collection.cardCount();
-  }
-
-  function identity(address userAddress) public view returns (address) {
-    return userAddress;
-  }
-
   modifier onlySuperAdmin() {
     require(msg.sender == admin, "Only Super Admin can call this function");
     _;

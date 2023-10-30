@@ -2,7 +2,6 @@
 //pragma solidity  >=0.5.0 <0.6.0;
 pragma solidity ^0.8.19;
 
-import "hardhat/console.sol";
 import "./Ownable.sol";
 import "./ERC721.sol";
 import "./Pokemon.sol";
@@ -43,17 +42,11 @@ contract Collection {
     address receiver,
     address pokemonAdress
   ) public returns (bool) {
-    console.log("goal: ");
-    console.log(pokemonAdress);
     for (int i = 0; i < cardCount; i++) {
-      console.log("pokemonAdress");
-      console.log(address(pokemons[i]));
       // pokemon trouver.
       if (address(pokemons[i]) == pokemonAdress) {
-        console.log("pokemon trouver");
         // est ce qu'il est libre ?
         if (!pokemons[i].hasOwner()) {
-          console.log("pokemon libre");
           // si oui, on mint.
           pokemons[i].setOwner(receiver);
         }
@@ -66,15 +59,10 @@ contract Collection {
   function balanceOf(address owner) public view returns (int) {
     int balance = 0;
     for (int i = 0; i < cardCount; i++) {
-      // log:  owner vs pokemon owner
-      console.log("[card balance]");
-      console.log(owner);
-      console.log(pokemons[i].owner());
       pokemons[i].hasOwner();
       if (pokemons[i].hasOwner()) {
         bool userOwnedPokemon = pokemons[i].owner() == owner;
         if (userOwnedPokemon) {
-          console.log("[one pokemon found]");
           balance++;
         }
       }

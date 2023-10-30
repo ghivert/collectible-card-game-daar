@@ -1,6 +1,5 @@
 pragma solidity ^0.8.19;
 
-import "hardhat/console.sol";
 import "./ERC721.sol";
 import "./Ownable.sol";
 import "./Pokemon.sol";

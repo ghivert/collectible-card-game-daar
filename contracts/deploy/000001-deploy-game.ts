@@ -15,54 +15,56 @@ const deployer: DeployFunction = async hre => {
       main.createCollection2(collection.name, collection.code);
   })
 
-// /**
-//  * aFIICHAGE DES COLLECTIONS
-//  */
-//   let collections : any[] = await main.allCollections();
-//   /**
-//    * Rajout des pokemons from api to collections
-//    */
-//   setTimeout(async () => {
-//     //ajout des pokemons dans la blockchain
-//     const pokemons = getPokemonFromApi();
+/**
+ * aFIICHAGE DES COLLECTIONS
+ */
+  let collections : any[] = await main.allCollections();
+  /**
+   * Rajout des pokemons from api to collections
+   */
+  setTimeout(async () => {
+    //ajout des pokemons dans la blockchain
+    const pokemons = getPokemonFromApi();
     
-//     let insertion = 0
-//     pokemons.forEach(async pokemon => {
-//       if (collections.includes(pokemon.set)) {
-//         const position = collections.indexOf(pokemon.set);
-//         insertion++;
-//         await  main.addCardToCollection(position, pokemon.id)
-//       }
-//     })
-//   }, 5000);
+    let insertion = 0
+    pokemons.forEach(async pokemon => {
+      if (collections.includes(pokemon.set)) {
+        const position = collections.indexOf(pokemon.set);
+        insertion++;
+        console.log("je uis la ")
+        await  main.addCardToCollection(position, pokemon.id)
+      }
+    })
+  }, 5000);
   
 
-//   /**
-//    * Mint card to user 
-//    */
-//   setTimeout(async () => {
-//     console.log(" creation de pokemon NFT");
-//     // retrive the user address
-//     const userAddress = "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65";
-//     // retrive all pokemons
-//     let allPokemons : any[] = [];
-//     for (let i = 0; i < collections.length; i++) {
-//       const pokemons = await main.allPokemonsFrom(i);
-//       allPokemons = allPokemons.concat(pokemons);
-//     }
-//     const { deployer } = await hre.getNamedAccounts();
-//     console.log(`Connected address: ${deployer}`);
-//     console.log(allPokemons);
-//     /*
-//     main.mint( userAddress , allPokemons[0]).then(()=>
-//         main.ownerOf( allPokemons[0]).then(console.log)
-//     )*/
-//   }, 10000);
+  /**
+   * Mint card to user 
+   */
+  setTimeout(async () => {
+    console.log(" creation de pokemon NFT");
+    // retrive the user address
+    const userAddress = "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65";
+    
+    // retrive all pokemons
+    let allPokemons : any[] = [];
+    console.log(collections)
+    console.log(collections.length)
+    for (let i = 0; i < collections.length; i++) {
+      const pokemons = await main.allPokemonsFrom(i);
+      console.log(pokemons)
+      allPokemons = allPokemons.concat(pokemons);
+    }
   
-}
-
-
-
+    console.log(allPokemons);
+   
+    if (allPokemons.length >= 1) {
+        main.mint( userAddress , allPokemons[0]).then(()=>
+        main.ownerOf( allPokemons[0]).then(console.log)
+      )        
+    }
+  }, 7000);          
+}      
 
 const getCollectionFromApi = () => {
   return getAllCollections()
