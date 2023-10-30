@@ -5,8 +5,8 @@ import wallet from "./wallet"
  * @param collectionId 
  * @returns 
  */
-const getAllCollections = async () => {
-    return await wallet?.contract.allCollections();   
+const getAllCollections = async (wallet) => {
+    return await wallet?.contract.allCollections();
 }
 
 export {

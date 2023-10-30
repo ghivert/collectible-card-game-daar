@@ -1,9 +1,9 @@
 import { getAllCollections } from '@/services/blockchaine/collection.service'
 import React, { useEffect } from 'react'
 
-const Home = () => {
+const Home = ({ wallet }) => {
   useEffect(() => {
-    getAllCollections().then(console.log)
+    getAllCollections(wallet).then(console.log)
   }, [])
 
   return (
