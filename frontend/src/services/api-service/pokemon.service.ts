@@ -1,5 +1,6 @@
 //import data from './ressources/pokemon_local_image.json';
 import data from './ressources/pokemon.json';
+import collectionData from './ressources/collection.json';
 const getAllPokemon = async () => {
     return data;
 }
@@ -24,23 +25,17 @@ const getAllCollections = async () => {
 
 /** Returns an array of collections labels
  * Do not return the collection items, return only the name.
+ * - name: collection name
+ * - id: collection id
+ * - size: number of items in the collection
  * @returns 
  */
 const getAllCollectionsMetadata = async () => {
-    const collectionsMetaData = data.cards.map((pokemon: any) => {
-        const collectionName = pokemon.set;
-        const collectionId = pokemon.setCode;
-        const collectionSize = data.cards.filter((pokemon: any) => pokemon.setCode === collectionId).length;
-        return {name:collectionName, id:collectionId, size:collectionSize};
-    });
-    // delete duplicates
-    const uniqueCollections = collectionsMetaData.filter((collection, index, self) =>
-        index === self.findIndex((t) => (
-            t.id === collection.id
-        ))
-    )
-    return uniqueCollections;
+    return collectionData.sets.map((set: any) => (
+        {name: set.name, id: set.code, size: set.totalCards}
+    ))
 }
+
 
 const getCollectionById = async (id: string) => {
     console.log("getCollectionById: ", id);

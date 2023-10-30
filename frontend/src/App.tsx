@@ -73,7 +73,10 @@ export const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home wallet={wallet} />} />
           <Route path="me" element={<User wallet={wallet} />} />
-          <Route path="collections" element={<PokemonCollectionsPresenter />} />
+          <Route
+            path="collections"
+            element={<PokemonCollectionsPresenter wallet={wallet} />}
+          />
           <Route path="/pokemon/:id" element={<PokemonDetails />} />
           <Route
             path="/collection/:id"

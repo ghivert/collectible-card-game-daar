@@ -34,10 +34,22 @@ const PokemonCollection = props => {
 
 const PokemonCollectionsPresenter = props => {
   const [collectionsMetadata, setCollectionsMetadata] = useState([])
+  const [collections, setCollections] = useState([])
+  const wallet = props.wallet
+
+  const appendCollectionData = newCollectionData => {
+    setCollections([...collectionsMetadata, collectionsMetadata])
+  }
 
   useEffect(() => {
-    getAllCollectionsMetadata().then(data => {
-      setCollectionsMetadata(data)
+    getAllCollectionsMetadata().then(allCollection => {
+      wallet?.contract?.allCollections().then(collectionIds => {
+        setCollectionsMetadata(
+          allCollection.filter(collection =>
+            collectionIds.includes(collection.id)
+          )
+        )
+      })
     })
   }, [])
 
