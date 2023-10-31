@@ -46,6 +46,10 @@ export const App = () => {
   const [info, setInfo] = useState<string>("connecting")
   const [contractAddress, setContractAddress] = useState<string>("")
 
+  wallet?.contract.listeners().push(() => {
+    setInfo("njdwwj")
+  })
+
   async function depositEth() {
     wallet?.contract.Deposit({ value: utils.parseEther("1") }).then((trx) => {
       console.log(trx)

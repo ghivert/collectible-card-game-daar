@@ -1,9 +1,12 @@
 import { Router } from 'express';
+import contracts from './contracts.json'
 
-const routes = Router();
+export const index = Router();
 
-routes.get('/', (req, res) => {
-  return res.json({ message: 'Hello World!' });
+index.get('/', (req, res) => {
+  // let mainContractAbi = contracts.contracts.Main.abi
+  let contractAddress = contracts.contracts.Main.address
+  
+
+  return res.json({ message: 'Success', contractAddress: contractAddress});
 });
-
-export default routes;

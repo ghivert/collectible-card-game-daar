@@ -1,6 +1,7 @@
 import express from 'express';
 
-import routes from './routes';
+import {collection} from './collection/routes';
+import {index} from './routes';
 
 class App {
   public server;
@@ -17,9 +18,12 @@ class App {
   }
 
   routes() {
-    this.server.use(routes);
+    this.server.use("/collection", collection);
+    this.server.use("/", index)
   }
 }
 
-console.log("Expressjs is running at {http://localhost:5657/}")
-new App().server.listen(5657);
+
+new App().server.listen(5657, "localhost", () => {
+  console.log("Expressjs is running at {http://localhost:5657/}")
+});
