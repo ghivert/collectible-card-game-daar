@@ -12,10 +12,10 @@ import {BigNumber, utils} from 'ethers'
 
 
 
-
 /*
 export const App = () => {
   const wallet = useWallet()
+
 
   return (
 
@@ -26,6 +26,7 @@ export const App = () => {
       </Route>
     </Routes>
     </BrowserRouter>
+
   )
 }*/
 export const App = () => {

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
-//import "./Collection.sol";
-
 contract Main {
   uint256 balance;
   event Deposited(address addr);
@@ -16,3 +14,4 @@ contract Main {
       return balance;
   }
 }
+
