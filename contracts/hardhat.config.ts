@@ -12,10 +12,10 @@ import 'hardhat-abi-exporter'
 const config: HardhatUserConfig = {
   solidity: '0.8.16',
   networks: {
-    hardhat: {
+    hardhat:{
       initialBaseFeePerGas: 0,
       chainId: 1337,
-    }
+    },
   },
   paths: {
     deploy: './deploy',
