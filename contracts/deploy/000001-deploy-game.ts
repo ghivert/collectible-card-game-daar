@@ -14,7 +14,7 @@ const deployer: DeployFunction = async hre => {
   getCollectionFromApi().forEach(collection => {
       main.createCollection2(collection.name, collection.code);
   })
-   
+       
 /**
  * aFIICHAGE DES COLLECTIONS
  */
