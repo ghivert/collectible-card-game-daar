@@ -11,12 +11,18 @@ import 'hardhat-abi-exporter'
 // Go to https://hardhat.org/config/ to learn more
 const config: HardhatUserConfig = {
   solidity: '0.8.16',
+  networks: {
+    hardhat: {
+      initialBaseFeePerGas: 0,
+      chainId: 1337,
+    }
+  },
   paths: {
     deploy: './deploy',
     sources: './src',
   },
   namedAccounts: {
-    deployer: { default: 0 },
+    deployer: { default: 1 },
     admin: { default: 0 },
     second: { default: 1 },
     random: { default: 8 },

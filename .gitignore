@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 /build
 typechain
+backend/src/contracts.json

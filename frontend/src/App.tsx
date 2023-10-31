@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import * as ethereum from '@/lib/ethereum'
 import * as main from '@/lib/main'
+import { BigNumber, utils } from 'ethers'
 
 type Canceler = () => void
 const useAffect = (
@@ -41,9 +42,37 @@ const useWallet = () => {
 
 export const App = () => {
   const wallet = useWallet()
+  const [balance, setBalance] = useState<string>("0")
+  const [info, setInfo] = useState<string>("connecting")
+  const [contractAddress, setContractAddress] = useState<string>("")
+
+  wallet?.contract.listeners().push(() => {
+    setInfo("njdwwj")
+  })
+
+  async function depositEth() {
+    wallet?.contract.Deposit({ value: utils.parseEther("1") }).then((trx) => {
+      console.log(trx)
+    })
+  }
+
+  useAffect(() => {
+    setInfo(String(wallet?.details.account))
+    wallet?.contract.seeBalance().then((num: BigNumber) => {
+      setBalance(utils.formatEther(num))
+    })
+    setContractAddress(String(wallet?.contract.address))
+
+    return Promise.resolve()
+  }, [wallet])
+
   return (
     <div className={styles.body}>
-      <h1>Welcome to Pokémon TCG</h1>
+      
+      <button onClick={depositEth}>Deposit 1 ETH</button>
+      <p>Account {info}</p>
+      <p>Contract {contractAddress}</p>
+      <p>Balance on the contract {balance} ETH</p>
     </div>
   )
 }
