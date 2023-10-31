@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The recentralized-decentralized-app backend",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./bin/main.js",
+    "dev": "ts-node ./src/main.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^20.8.10",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
