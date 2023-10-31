@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
-import "./Collection.sol";
+//import "./Collection.sol";
 
 contract Main {
-  int private count;
-  mapping(int => Collection) private collections;
+  uint256 balance;
+  event Deposited(address addr);
 
-  constructor() {
-    count = 0;
+  function Deposit() public payable {
+      balance += msg.value;
+      emit Deposited(msg.sender);
   }
 
-  function createCollection(string calldata name, int cardCount) external {
-    collections[count++] = new Collection(name, cardCount);
+  function seeBalance() public view returns (uint256) {
+      return balance;
   }
 }
