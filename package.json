@@ -6,10 +6,14 @@
   "author": "Guillaume Hivert <hivert.is.coming@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "yarn --cwd contracts install && yarn --cwd frontend install",
-    "dev": "concurrently -c \"blue.bold,red.bold\" --names \"ethereum,frontend\" \"yarn --cwd contracts dev\" \"yarn --cwd frontend dev\""
+    "postinstall": "yarn --cwd contracts install && yarn --cwd frontend install && yarn --cwd backend install",
+    "dev": "concurrently -c \"blue.bold,red.bold,green.bold\" --names \"ethereum,frontend,backend\" \"yarn --cwd contracts dev\" \"yarn --cwd frontend dev\" \"yarn --cwd backend dev\""
   },
   "devDependencies": {
     "concurrently": "^7.5.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "react-router-dom": "^6.17.0"
   }
 }

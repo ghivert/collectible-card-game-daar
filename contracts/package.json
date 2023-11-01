@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "DOTENV_CONFIG_PATH=../.env hardhat node --export ../frontend/src/contracts.json --watch",
+    "dev": "DOTENV_CONFIG_PATH=../.env hardhat node --export ../frontend/src/contracts.json --watch & hardhat node --export ../backend/src/contracts.json",
     "console": "DOTENV_CONFIG_PATH=../.env hardhat console",
     "compile": "DOTENV_CONFIG_PATH=../.env hardhat compile",
     "deploy:local": "DOTENV_CONFIG_PATH=../.env hardhat deploy --network localhost --export ../frontend/src/contracts.json",
