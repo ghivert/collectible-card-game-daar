@@ -15,6 +15,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       initialBaseFeePerGas: 0,
       gas: 3000000,
+      chainId: 1337,
     },
   },
   paths: {
