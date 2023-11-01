@@ -49,6 +49,15 @@ abstract contract IMarket {
     // Gets the address of the given auction.
     function sellerOf(uint256 _auctionId) virtual external view returns(address);
 
+    // Gets the address of the given auction. If not bidded yet then 0x0
+    function currentBidderOf(uint256 _auctionId) virtual external view returns(address);
+
+    // Zortzortzort
+    function sellersTokenIdOf(uint256 _auctionId) virtual external view returns(uint256);
+
+    // Gets the addressdwwd
+    function currentBiddersTokenIdOf(uint256 _auctionId) virtual external view returns(uint256);
+
     // Returns the ERC271 contract address assiciated with the auction.
     function contractAddressOf(uint256 _auctionId) virtual external view returns(address);
 

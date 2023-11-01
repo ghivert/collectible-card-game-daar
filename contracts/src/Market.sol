@@ -126,8 +126,23 @@ contract Marketplace is IMarket {
         return _auctions[_auctionId]._seller;
     }
 
+    // Gets the address of the given auction. If not bidded yet then 0x0
+    function currentBidderOf(uint256 _auctionId) override external view returns(address) {
+        return _auctions[_auctionId]._bidder;
+    }
+
+    // Zortzortzort
+    function sellersTokenIdOf(uint256 _auctionId) override external view returns(uint256) {
+        return _auctions[_auctionId]._sellersTokenId;
+    }
+
+    // Gets the addressdwwd 0 if no one offered smt yet
+    function currentBiddersTokenIdOf(uint256 _auctionId) override external view returns(uint256) {
+        return _auctions[_auctionId]._biddersTokenId;
+    }
+
     // Returns the ERC271 contract address assiciated with the auction.
-    function contractAddressOf(uint256 _auctionId)override external view returns(address) {
+    function contractAddressOf(uint256 _auctionId) override external view returns(address) {
         return _auctions[_auctionId]._contractAddress;
     }
 
@@ -163,9 +178,8 @@ contract Marketplace is IMarket {
 
         AuctionInfo memory info = _auctions[_auctionId];
 
+        // Do the exchange here!
         // IERC721 contractObject = IERC721(info._contractAddress);
-
-        // There is no guarantee this will be atmoic?
         // contractObject.safeTransferFrom(info._seller, info._bidder, info._sellersTokenId);
         // contractObject.safeTransferFrom(info._bidder, info._seller, info._biddersTokenId);
 
