@@ -40,10 +40,44 @@ const useWallet = () => {
 }
 
 export const App = () => {
+
   const wallet = useWallet()
+
+  const addCollection = () => {
+    console.log('Add collection', wallet)
+    wallet?.contract
+      .createCollection('collection1', wallet?.details.account)
+      .then((res: any) => {
+        console.log(res)
+        // wallet?.contract.owner_of_collection_('collection1').then(console.log)
+      })
+      .catch((e: any) => {
+          console.log(e)
+          // wallet?.contract.owner_of_collection_('collection1').then(console.log)
+        })
+        .finally(() => {
+          console.log("fine")
+          // wallet?.contract.owner_of_collection_('collection1').then(console.log)
+        })
+  }
+
+  const getAllCollections = () => {
+    console.log('Get all collections')
+    wallet?.contract.getAllCollections().then(console.log).catch(console.error)
+  }
+
+
   return (
     <div className={styles.body}>
       <h1>Welcome to Pokémon TCG</h1>
+      <div>
+        <button type="button" onClick={addCollection}>
+          Add collection{' '}
+        </button>
+        <button type="button" onClick={getAllCollections}>
+          collections{' '}
+        </button>
+      </div>
     </div>
   )
 }
