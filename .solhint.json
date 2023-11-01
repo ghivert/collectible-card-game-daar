@@ -1,8 +1,0 @@
-{
-  "extends": "solhint:recommended",
-  "rules": {
-    "indent": 2,
-    "two-lines-top-level-separator": false,
-    "compiler-fixed": false
-  }
-}
