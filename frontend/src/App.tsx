@@ -42,22 +42,26 @@ const useWallet = () => {
 export const App = () => {
 
   const wallet = useWallet()
+  const adminAccount = wallet?.details.account
+  console.log('Admin', adminAccount)
+
+  useEffect(() => {
+    console.log('Wallet', wallet)
+  }, [wallet])
+
 
   const addCollection = () => {
     console.log('Add collection', wallet)
     wallet?.contract
-      .createCollection('collection1', wallet?.details.account)
+      .createCollection('collection1', 100)
       .then((res: any) => {
         console.log(res)
-        // wallet?.contract.owner_of_collection_('collection1').then(console.log)
       })
       .catch((e: any) => {
           console.log(e)
-          // wallet?.contract.owner_of_collection_('collection1').then(console.log)
         })
         .finally(() => {
-          console.log("fine")
-          // wallet?.contract.owner_of_collection_('collection1').then(console.log)
+          console.log("added collection")
         })
   }
 
@@ -66,6 +70,45 @@ export const App = () => {
     wallet?.contract.getAllCollections().then(console.log).catch(console.error)
   }
 
+  const mintAndAssignCards = () => {
+    console.log('Mint and assign cards')
+    wallet?.contract
+      .mintAndAssignCards('collection1', ['card1','card2','card3'])
+      .then(console.log)
+      .catch(console.error)
+  }
+
+  const assignCardToAUser = () => {
+    console.log('Assign card to a user')
+    wallet?.contract
+      .assignCardToUser('card2', adminAccount)
+      .then(console.log)
+      .catch(console.error)
+  }
+
+const getCardsOfACollection = () => {
+  console.log('Get cards of a collection')
+  wallet?.contract
+    .getCardsFromCollection('collection1')
+    .then(console.log)
+    .catch(console.error)
+}
+
+const getCardsOfAUser = () => {
+  console.log('Get cards of a user')
+  wallet?.contract
+    .getCardsOfUser(adminAccount)
+    .then(console.log)
+    .catch(console.error)
+}
+
+const userOwnsCard = () => {
+  console.log('User owns card')
+  wallet?.contract
+    .userOwnsCard(adminAccount, 'card2')
+    .then(console.log)
+    .catch(console.error)
+}
 
   return (
     <div className={styles.body}>
@@ -77,6 +120,21 @@ export const App = () => {
         <button type="button" onClick={getAllCollections}>
           collections{' '}
         </button>
+        <button type="button" onClick={mintAndAssignCards}>
+          Mint and assign cards{' '}
+          </button>
+          <button type="button" onClick={getCardsOfACollection}>
+          Retrieve cards from a collection name{' '}
+          </button>
+          <button type="button" onClick={assignCardToAUser}>
+          Assign a card to a user{' '}
+          </button>
+          <button type="button" onClick={getCardsOfAUser}>
+          Retrieve cards Of a user address{' '}
+          </button>
+          <button type="button" onClick={userOwnsCard}>
+          User owns a card{' '}
+          </button>
       </div>
     </div>
   )
