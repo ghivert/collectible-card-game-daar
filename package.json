@@ -11,8 +11,5 @@
   },
   "devDependencies": {
     "concurrently": "^7.5.0"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
   }
 }

@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@openzeppelin/contracts@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/@openzeppelin/contracts/-/contracts-5.0.0.tgz"
-  integrity sha512-bv2sdS6LKqVVMLI5+zqnNrNU/CA+6z6CmwFXm/MzmOPBRSO5reEJN7z0Gbzvs0/bv/MZZXNklubpwy3v2+azsw==
-
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
