@@ -10,10 +10,11 @@ import 'hardhat-abi-exporter'
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 const config: HardhatUserConfig = {
-  solidity: '0.8.16',
+  solidity: '0.8.19',
   networks: {
-    hardhat:{
+    hardhat: {
       initialBaseFeePerGas: 0,
+      gas: 3000000,
       chainId: 1337,
     },
   },
