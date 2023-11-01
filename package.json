@@ -13,6 +13,7 @@
     "concurrently": "^7.5.0"
   },
   "dependencies": {
+    "@types/cors": "^2.8.15",
     "express": "^4.18.2",
     "react-router-dom": "^6.17.0"
   }
