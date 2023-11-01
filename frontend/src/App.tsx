@@ -32,6 +32,11 @@ export const App = () => {
 export const App = () => {
   const wallet = useWallet()
   const adminAccount = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
+
+  useEffect(() => {
+    console.log(wallet?.details)
+    // return Promise.resolve()
+  }, [wallet])
   
 
   const isEmptyAccount = !wallet?.details.account;
