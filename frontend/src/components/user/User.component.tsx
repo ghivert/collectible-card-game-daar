@@ -20,7 +20,7 @@ const User = props => {
       <div>
         {userPokemons.map((pokemon, index) => (
           <div key={index}>
-            <h3>Single pokemon</h3>
+            <h3>{index} Single pokemon</h3>
             <p>{pokemon}</p>
           </div>
         ))}

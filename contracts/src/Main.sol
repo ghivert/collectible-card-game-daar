@@ -16,9 +16,7 @@ contract Main is PokemonOwenership {
     admin = msg.sender;
   }
 
-  /**
-  Create new collection 
-  */
+
   function createCollection2(
     string memory name,
     string memory code
@@ -29,25 +27,19 @@ contract Main is PokemonOwenership {
     return collection;
   }
 
-  /** Retrieve the adderss of all pokemons
-   */
+
   function allPokemonsFrom(
     int collectionId
   ) public view returns (address[] memory) {
     return pokemonCollections[collectionId].getPokemons();
   }
 
-  /**
-    Create Pokemon NFT then return only its address
-  */
+
   function createPokemon2(string memory url_) public returns (Pokemon) {
     Pokemon p = new Pokemon(url_);
     return p;
   }
 
-  /**
-    Add a carte to a collection 
-   */
   function addCardToCollection(
     int collectionId,
     string memory pokemonId
@@ -56,9 +48,6 @@ contract Main is PokemonOwenership {
     return true; // s'assurer que la carte a bien été inseree
   }
 
-  /**
-    Get ALL COLECTION 
-   */
   function allCollections() public view returns (string[] memory) {
     Collection[] memory collections = new Collection[](
       uint256(collectionCount)
@@ -73,9 +62,7 @@ contract Main is PokemonOwenership {
     return codes;
   }
 
-  /**
-    Get ALL Pokemon of collection  
-  */
+ 
   function allPokemonsOfCollection(
     int collectionId
   ) public view returns (string[] memory) {
@@ -83,35 +70,27 @@ contract Main is PokemonOwenership {
     return collection.allPoekmons();
   }
 
-  /**
-      Id of pokemon a partir de son adress 
-  */
-  function pokemonFromadress(
-    address adressPokemon
-  ) public view returns (string memory) {
+  function balanceOf(
+    address _owner
+  ) public view virtual  returns (uint256) {
+    uint256 count = 0;
     for (int i = 0; i < collectionCount; i++) {
       Collection collection = pokemonCollections[i];
-      string memory chechpokemon = collection.pokemonFromadress(adressPokemon);
-      bool isIsNotEmpty = keccak256(abi.encodePacked(chechpokemon)) !=
-        keccak256(abi.encodePacked(""));
-      if (isIsNotEmpty) {
-        return chechpokemon;
-      }
+      count += collection.balanceOf(_owner);
     }
-    return "";
+    return count;
   }
 
-  /**
-      Affichage des cartes d'un utilisateur 
-  */
   function allCardsUser(
     address _owner
   ) public view virtual returns (string[] memory) {
-    string[] memory pokemonsUser = new string[](uint256(collectionCount));
+    uint256 cardCount = balanceOf(_owner);
+    string[] memory pokemonsUser = new string[]((cardCount));
     string[] memory result;
-    uint256 j = 0;
+    uint256 j = 0;        
     for (int i = 0; i < collectionCount; i++) {
       Collection collection = pokemonCollections[i];
+      // la liste des pokemon dans une collection
       result = (collection.allCardsUser(_owner));
       uint256 index = 0;
       while (index < result.length) {

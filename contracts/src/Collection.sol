@@ -19,16 +19,15 @@ contract Collection {
     code = _code;
   }
 
-  function addCard(string memory url) public {
-    Pokemon p = new Pokemon(url);
-    pokemons[cardCount] = p;
-    cardCount++;
+  function addCard(string memory id) public {
+    Pokemon p = new Pokemon(id);
+    pokemons[cardCount++] = p;
   }
 
   function getPokemons() public view returns (address[] memory) {
     address[] memory pokemonsResult = new address[](uint256(cardCount));
     uint256 iUint = 0;
-    for (int i = 0; i < (cardCount); i++) {
+    for (int i = 0; i < cardCount; i++) {
       pokemonsResult[iUint] = address(pokemons[i]);
       iUint++;
     }
@@ -51,13 +50,11 @@ contract Collection {
     }
   }
 
-  /**
-      returns all cards of user 
-   */
   function allCardsUser(
     address owner
   ) public view virtual returns (string[] memory) {
-    string[] memory allcards = new string[](uint256(cardCount));
+     uint256  numberCardsUser= balanceOf((owner));
+    string[] memory allcards = new string[](numberCardsUser);
     uint256 index = 0;
     for (int i = 0; i < cardCount; i++) {
       if (pokemons[i].owner() == owner) {
@@ -65,7 +62,18 @@ contract Collection {
         index++;
       }
     }
+   
     return allcards;
+  }
+
+  function balanceOf(address _owner) public view virtual returns (uint256) {
+    uint256 count = 0;
+    for (int i = 0; i < cardCount; i++) {
+      if (pokemons[i].owner() == _owner) {
+        count++;
+      }
+    }
+    return count;
   }
 
   function ownerOf(address _tokenId) public view virtual returns (address) {

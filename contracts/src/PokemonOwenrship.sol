@@ -8,24 +8,17 @@ import "./Collection.sol";
 contract PokemonOwenership is Ownable, ERC721 {
   mapping(int => Collection) public pokemonCollections;
   int public collectionCount;
+    
+  constructor() { }
 
-  constructor() {}
-
-  /*
-   * @dev reate and assign a new token to a specific address.
-     OnlyOwner
-   */
   function mint(address receiver, address pokemonAdress) public {
-    for (int i = 0; i < collectionCount; i++) {
-      if (pokemonCollections[i].mintAux(receiver, pokemonAdress)) {
-        break;
+      for (int i = 0; i < collectionCount; i++) {
+        if (pokemonCollections[i].mintAux(receiver, pokemonAdress)) {
+          break;
+        }
       }
     }
-  }
-
-  /**
-  Returns the owner of the tokenId token.
-  */
+  
   function ownerOf(
     address _tokenId
   ) public view virtual override returns (address) {
@@ -38,9 +31,6 @@ contract PokemonOwenership is Ownable, ERC721 {
     return address(0);
   }
 
-  /**
-  Transfers tokenId token from from to _to.
-  */
   function transferFrom(
     address _from,
     address _to,
@@ -56,9 +46,6 @@ contract PokemonOwenership is Ownable, ERC721 {
     */
   }
 
-  /**
-   Returns the account approved for tokenId token.
-   */
   function approve(
     address _approved,
     uint256 _tokenId

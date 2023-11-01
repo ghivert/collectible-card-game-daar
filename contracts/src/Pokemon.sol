@@ -4,7 +4,7 @@ import "./Ownable.sol";
 
 
 contract Pokemon is Ownable{
-  string  private id;
+  string public id;
   
   constructor(string memory  _id){
     id = _id;
@@ -12,6 +12,7 @@ contract Pokemon is Ownable{
 
   function getId() public view  returns (string memory){
     return id;
+    //return "I am a pokemon";
   }
 
 }

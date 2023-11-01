@@ -11,22 +11,23 @@ const deployer: DeployFunction = async hre => {
   const { deployer } = await hre.getNamedAccounts()
   await hre.deployments.deploy('Main', { from: deployer, log: true })
   const main =await hre.ethers.getContract("Main",deployer)
-  getCollectionFromApi().forEach(collection => {
+  const collections0 = getCollectionFromApi();
+  collections0.slice(0, 5).forEach(collection => {
       main.createCollection2(collection.name, collection.code);
-  })
-       
-/**
+  })    
+                         
+/**      
  * aFIICHAGE DES COLLECTIONS
  */
   let collections : any[] = await main.allCollections();
-  /**
+  /**   
    * Rajout des pokemons from api to collections
    */
   setTimeout(async () => {
     //ajout des pokemons dans la blockchain
     const pokemons = getPokemonFromApi();
-    
-    let insertion = 0
+       
+    let insertion = 0  
     pokemons.forEach(async pokemon => {
       if (collections.includes(pokemon.set)) {
         const position = collections.indexOf(pokemon.set);
@@ -35,34 +36,34 @@ const deployer: DeployFunction = async hre => {
       }
     })
   }, 5000);
-  
-
+     
+        
   /**
    * Mint card to user 
    */
   setTimeout(async () => {
-    console.log(" creation de pokemon NFT");
+    //console.log(" creation de pokemon NFT");
     // retrive the user address
-    const userAddress = "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65";
-       
+    const userAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+          
     // retrive all pokemons
     let allPokemons : any[] = [];  
-    console.log(collections)
-    console.log(collections.length)
+    //console.log(collections)
+    //console.log(collections.length)
     for (let i = 0; i < collections.length; i++) {
       const pokemons = await main.allPokemonsFrom(i);
       //console.log(pokemons)
       allPokemons = allPokemons.concat(pokemons);
-    }
-  
-    console.log(allPokemons);
+    }   
+             
+    //console.log(allPokemons);
    
     if (allPokemons.length >= 1) {
         main.mint( userAddress , allPokemons[0]).then(()=>
         main.ownerOf( allPokemons[0]).then(console.log)
       )        
     }
-  }, 7000);          
+  }, 7000);               
 }      
 
 const getCollectionFromApi = () => {

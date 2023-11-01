@@ -68,20 +68,20 @@ const PokemonCollectionPresenter = props => {
   const { id } = useParams()
   const wallet = props.wallet
 
-  const getCards = async () => {
+  const getCards = () => {
     //  modofier la fonction allPokemonsOfCollection ==> change int with sting :)
-    await wallet?.contract.allPokemonsOfCollection(3).then(data => {
+     wallet?.contract.allPokemonsOfCollection(3).then(data => {
       setSimpleCards(data)
       console.log(data)
     })
   }
 
-  useEffect(() => {
+  useEffect(   () => {
     getCollectionById(id).then(data => {
       setCards(data)
     })
     getCards()
-  }, [id])
+  }, [])
 
   console.log(cards)
 
