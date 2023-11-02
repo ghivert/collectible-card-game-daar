@@ -46,7 +46,7 @@ const deployer: DeployFunction = async hre => {
     // retrive the user address
     const userAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
           
-    // retrive all pokemons
+    // retrive all pokemons  
     let allPokemons : any[] = [];  
     //console.log(collections)
     //console.log(collections.length)
@@ -54,7 +54,7 @@ const deployer: DeployFunction = async hre => {
       const pokemons = await main.allPokemonsFrom(i);
       //console.log(pokemons)
       allPokemons = allPokemons.concat(pokemons);
-    }   
+    }      
              
     //console.log(allPokemons);
    
@@ -76,3 +76,4 @@ const getPokemonFromApi = () =>{
 
 
 export default deployer
+   

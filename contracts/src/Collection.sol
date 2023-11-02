@@ -2,7 +2,6 @@
 //pragma solidity  >=0.5.0 <0.6.0;
 pragma solidity ^0.8.19;
 
-import "hardhat/console.sol";
 import "./Ownable.sol";
 import "./ERC721.sol";
 import "./Pokemon.sol";
@@ -12,6 +11,7 @@ contract Collection {
   string public code;
   int public cardCount; //taile de la colection
   mapping(int => Pokemon) public pokemons;
+  
 
   constructor(string memory _name, int _cardCount, string memory _code) {
     name = _name;
@@ -104,5 +104,9 @@ contract Collection {
       }
     }
     return "";
+  }
+
+  function getCard(int indice ) public returns( Pokemon){
+     return pokemons[indice];
   }
 }

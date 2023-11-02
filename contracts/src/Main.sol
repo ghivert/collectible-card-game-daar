@@ -20,7 +20,12 @@ contract Main is PokemonOwenership {
     collectionCount++;
     return collection;
   }
-  
+  function allPokemonsFrom(
+    int collectionId
+  ) public view returns (address[] memory) {
+    return pokemonCollections[collectionId].getPokemons();
+  }
+
   function createPokemon2(string memory url_) public returns (Pokemon) {
     Pokemon p = new Pokemon(url_);
     return p;
@@ -63,7 +68,7 @@ contract Main is PokemonOwenership {
         pokemonsUser[j] = result[index];
         index++;
         j++;
-      }
+      }   
     }
     return pokemonsUser;
   }
@@ -73,3 +78,4 @@ contract Main is PokemonOwenership {
   //   boosters.push(newBooster);
   //   }
 }
+   

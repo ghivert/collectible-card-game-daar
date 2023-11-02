@@ -23,7 +23,7 @@ contract Ownable {
     return _owner != address(0);
   }
 
-  function setOwner(address _newOwner) external {
+  function setOwner(address _newOwner) external   {
     _owner = _newOwner;
   }
 
