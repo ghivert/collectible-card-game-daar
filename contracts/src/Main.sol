@@ -9,7 +9,6 @@ import "./Booster.sol";
 
 contract Main is PokemonOwenership {
   address private admin;
-  Booster[] public boosters;
 
   constructor() {
     admin = msg.sender;
@@ -72,10 +71,7 @@ contract Main is PokemonOwenership {
     }
     return pokemonsUser;
   }
-  // function createBooster(address[] memory cardIds) external {
-  //   uint256 boosterId = boosters.length;
-  //   Booster  newBooster = new  Booster(boosterId, cardIds, msg.sender, false);
-  //   boosters.push(newBooster);
-  //   }
+  function createBooster(address[] memory cardIds) external {
+    }
 }
    

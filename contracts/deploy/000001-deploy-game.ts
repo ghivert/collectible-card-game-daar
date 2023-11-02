@@ -55,17 +55,17 @@ const deployer: DeployFunction = async hre => {
       //console.log(pokemons)
       allPokemons = allPokemons.concat(pokemons);
     }      
-             
+                
     //console.log(allPokemons);
    
     if (allPokemons.length >= 1) {
         main.mint( userAddress , allPokemons[0]).then(()=>
         main.ownerOf( allPokemons[0]).then(console.log)
       )        
-    }
-  }, 7000);               
-}      
-
+    }     
+  }, 1000);               
+}         
+  
 const getCollectionFromApi = () => {
   return getAllCollections()
 }   
