@@ -15,5 +15,4 @@ abstract contract ERC721 {
     address _tokenId
   ) public payable virtual;
 
-  function approve(address _approved, uint256 _tokenId) public payable virtual;
 }

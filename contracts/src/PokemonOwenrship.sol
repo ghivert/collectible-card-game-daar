@@ -46,8 +46,12 @@ contract PokemonOwenership is Ownable, ERC721 {
     */
   }
 
-  function approve(
-    address _approved,
-    uint256 _tokenId
-  ) public payable override {}
+  function balanceOf(address _owner) public view virtual  returns (uint256) {
+    uint256 count = 0;
+    for (int i = 0; i < collectionCount; i++) {
+      Collection collection = pokemonCollections[i];
+      count += collection.balanceOf(_owner);
+    }
+    return count;
+  }
 }
