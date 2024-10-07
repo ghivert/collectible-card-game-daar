@@ -4,15 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "DOTENV_CONFIG_PATH=../.env hardhat node --export ../frontend/src/contracts.json --watch",
-    "console": "DOTENV_CONFIG_PATH=../.env hardhat console",
-    "compile": "DOTENV_CONFIG_PATH=../.env hardhat compile",
-    "deploy:local": "DOTENV_CONFIG_PATH=../.env hardhat deploy --network localhost --export ../frontend/src/contracts.json",
-    "deploy:staging": "DOTENV_CONFIG_PATH=../.env hardhat deploy --network kovan",
-    "deploy:production": "DOTENV_CONFIG_PATH=../.env hardhat deploy --network polygon",
-    "export:local": "DOTENV_CONFIG_PATH=../.env hardhat export --network localhost --export ../frontend/src/contracts.json",
-    "export:production": "DOTENV_CONFIG_PATH=../.env hardhat export --network polygon --export ../frontend/src/contracts.json",
-    "test": "DOTENV_CONFIG_PATH=../.env hardhat test"
+    "dev": "cross-env DOTENV_CONFIG_PATH=../.env hardhat node --export ../frontend/src/contracts.json --watch",
+    "console": "cross-env DOTENV_CONFIG_PATH=../.env hardhat console",
+    "compile": "cross-env DOTENV_CONFIG_PATH=../.env hardhat compile",
+    "deploy:local": "cross-env DOTENV_CONFIG_PATH=../.env hardhat deploy --network localhost --export ../frontend/src/contracts.json",
+    "deploy:staging": "cross-env DOTENV_CONFIG_PATH=../.env hardhat deploy --network kovan",
+    "deploy:production": "cross-env DOTENV_CONFIG_PATH=../.env hardhat deploy --network polygon",
+    "export:local": "cross-env DOTENV_CONFIG_PATH=../.env hardhat export --network localhost --export ../frontend/src/contracts.json",
+    "export:production": "cross-env DOTENV_CONFIG_PATH=../.env hardhat export --network polygon --export ../frontend/src/contracts.json",
+    "test": "cross-env DOTENV_CONFIG_PATH=../.env hardhat test"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
@@ -38,6 +38,7 @@
     "typescript": "^4.8.4"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "hardhat-abi-exporter": "^2.10.1"
   }
 }
